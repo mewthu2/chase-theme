@@ -543,6 +543,14 @@
   "chase": {
     "header": {
       "wishlist": "Favoritos"
+    },
+    "card": {
+      "sold_out": "Esgotado",
+      "new": "Novo",
+      "colors": {
+        "one": "{{ count }} cor",
+        "other": "{{ count }} cores"
+      }
     }
   }
 }

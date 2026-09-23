@@ -531,6 +531,14 @@
   "chase": {
     "header": {
       "wishlist": "Wishlist"
+    },
+    "card": {
+      "sold_out": "Sold out",
+      "new": "New",
+      "colors": {
+        "one": "{{ count }} color",
+        "other": "{{ count }} colors"
+      }
     }
   }
 }

@@ -1,0 +1,40 @@
+{% doc %}
+  Renders Chase product card badges: sold out, discount percentage and new.
+
+  @param {product} product - The product
+  @param {string} id - The badge element id used by aria-labelledby
+
+  @example
+  {% render 'chase-card-badges', product: card_product, id: 'Badge-123' %}
+{% enddoc %}
+{%- liquid
+  assign new_tag = settings.chase_new_tag | downcase | strip
+  assign is_new = false
+  if new_tag != blank
+    for tag in product.tags
+      assign tag_key = tag | downcase | strip
+      if tag_key == new_tag
+        assign is_new = true
+        break
+      endif
+    endfor
+  endif
+  assign discount = 0
+  if product.compare_at_price > product.price
+    assign discount = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round
+  endif
+-%}
+{%- if product.available == false or discount > 0 or is_new -%}
+  <div class="chase-badges" id="{{ id }}">
+    {%- if product.available == false -%}
+      <span class="chase-badge chase-badge--soldout">{{ 'chase.card.sold_out' | t }}</span>
+    {%- else -%}
+      {%- if is_new -%}
+        <span class="chase-badge">{{ 'chase.card.new' | t }}</span>
+      {%- endif -%}
+      {%- if discount > 0 -%}
+        <span class="chase-badge chase-badge--sale">-{{ discount }}%</span>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+{%- endif -%}

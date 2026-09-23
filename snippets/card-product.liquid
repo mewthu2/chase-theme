@@ -53,7 +53,7 @@
           {% if card_product.featured_media == nil and settings.card_style == 'card' %} ratio{% endif %}
           {% if horizontal_class %} card--horizontal{% endif %}
         "
-        style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
+        style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%; --chase-ratio: {{ 1 | divided_by: ratio }};"
       >
         <div
           class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}"
@@ -163,6 +163,21 @@
               </a>
             </h3>
             <div class="card-information">
+              {%- liquid
+                assign chase_color_label = ''
+                for option in card_product.options_with_values
+                  assign option_key = option.name | downcase | strip
+                  if option_key == 'cor' or option_key == 'color' or option_key == 'colour'
+                    assign chase_color_label = option.selected_value
+                    if option.values.size > 1
+                      assign chase_color_label = 'chase.card.colors' | t: count: option.values.size
+                    endif
+                  endif
+                endfor
+              -%}
+              {%- if chase_color_label != blank -%}
+                <span class="chase-card__color">{{ chase_color_label }}</span>
+              {%- endif -%}
               {%- if show_vendor -%}
                 <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
                 <div class="caption-with-letter-spacing light">{{ card_product.vendor }}</div>
@@ -207,6 +222,7 @@
               {%- endif -%}
 
               {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
+              {%- render 'chase-card-swatches', product: card_product, max: 5 -%}
               {%- if card_product.quantity_price_breaks_configured? -%}
                 {% if card_product.variants_count == 1 and quick_add == 'bulk' %}
                   {% liquid
@@ -550,23 +566,8 @@
               </div>
             {% endif %}
           {% endif %}
-          <div class="card__badge {{ settings.badge_position }}">
-            {%- if card_product.available == false -%}
-              <span
-                id="Badge-{{ section_id }}-{{ card_product.id }}"
-                class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}"
-              >
-                {{- 'products.product.sold_out' | t -}}
-              </span>
-            {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
-              <span
-                id="Badge-{{ section_id }}-{{ card_product.id }}"
-                class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
-              >
-                {{- 'products.product.on_sale' | t -}}
-              </span>
-            {%- endif -%}
-          </div>
+          {%- assign chase_badge_id = 'Badge-' | append: section_id | append: '-' | append: card_product.id -%}
+          {%- render 'chase-card-badges', product: card_product, id: chase_badge_id -%}
         </div>
       </div>
     </div>
