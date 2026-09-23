@@ -1,8 +1,18 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "chase-hero",
       "settings": {
+        "video": "shopify://files/videos/23B506DC-46BD-481D-9D6B-C19621CFD4A0 (1).mov",
         "overlay_opacity": 20,
         "height": "full",
         "text_position": "bottom-left",
@@ -64,6 +74,7 @@
         "tile-0": {
           "type": "tile",
           "settings": {
+            "image": "shopify://shop_images/fotosprosite_58_4d818910-3978-44a4-a34f-43b670688b8c.png",
             "title": "Leggings",
             "subtitle": "Seamless e alta compressão",
             "link": "shopify://collections/leggings"
@@ -72,6 +83,7 @@
         "tile-1": {
           "type": "tile",
           "settings": {
+            "image": "shopify://shop_images/fotos_pro_site_-_2025-09-19T163012.007.png",
             "title": "Tops",
             "subtitle": "Sustentação para todo treino",
             "link": "shopify://collections/tops"
@@ -80,6 +92,7 @@
         "tile-2": {
           "type": "tile",
           "settings": {
+            "image": "shopify://shop_images/Untitleddesign_47.png",
             "title": "Shorts",
             "subtitle": "Liberdade de movimento",
             "link": "shopify://collections/shorts"
@@ -88,6 +101,7 @@
         "tile-3": {
           "type": "tile",
           "settings": {
+            "image": "shopify://shop_images/t-shirt-basica-essential-preto-chasebrasil-com-1.jpg",
             "title": "Casual",
             "subtitle": "Do treino para a rua",
             "link": "shopify://collections/casual"
@@ -116,6 +130,7 @@
         "panel-0": {
           "type": "panel",
           "settings": {
+            "image": "shopify://shop_images/IMG_1132_1.jpg",
             "heading": "Tibetan Red",
             "text": "Edição limitada. Quando acabar, acabou.",
             "button_label": "Comprar drop",
@@ -125,6 +140,7 @@
         "panel-1": {
           "type": "panel",
           "settings": {
+            "image": "shopify://shop_images/fotosprosite-2026-08-13T170522.215.jpg",
             "heading": "Dark Sea",
             "text": "A nova cor da temporada.",
             "button_label": "Comprar drop",
