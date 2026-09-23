@@ -539,6 +539,9 @@
         "one": "{{ count }} color",
         "other": "{{ count }} colors"
       }
+    },
+    "tabs": {
+      "view_all": "View all"
     }
   }
 }

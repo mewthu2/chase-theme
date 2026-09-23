@@ -1,0 +1,139 @@
+.chase-carousel {
+  display: block;
+  position: relative;
+  container-type: inline-size;
+}
+
+.chase-carousel__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - (var(--columns, 4) - 1) * var(--chase-gap)) / var(--columns, 4));
+  gap: var(--chase-gap);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.chase-carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+.chase-carousel__slide {
+  scroll-snap-align: start;
+  min-width: 0;
+}
+
+.chase-carousel__controls {
+  position: absolute;
+  inset: 0 0 auto 0;
+  pointer-events: none;
+}
+
+.chase-carousel__button {
+  pointer-events: auto;
+  position: absolute;
+  top: calc(100cqw / var(--columns, 4) * 0.625 - 2.2rem);
+  width: 4.4rem;
+  height: 4.4rem;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.12);
+  transition: opacity 0.2s ease;
+  z-index: 4;
+}
+
+.chase-carousel__button[data-dir='prev'] {
+  left: 1.2rem;
+}
+
+.chase-carousel__button[data-dir='next'] {
+  right: 1.2rem;
+}
+
+.chase-carousel__button .svg-wrapper,
+.chase-carousel__button svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.chase-carousel__button[data-dir='prev'] svg {
+  transform: rotate(90deg);
+}
+
+.chase-carousel__button[data-dir='next'] svg {
+  transform: rotate(-90deg);
+}
+
+.chase-carousel__button:disabled,
+.chase-carousel--static .chase-carousel__button {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chase-tabs {
+  display: block;
+}
+
+.chase-tabs__list {
+  display: flex;
+  gap: 2.4rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.chase-tabs__tab {
+  background: none;
+  border: 0;
+  padding: 0.4rem 0;
+  font-family: inherit;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.5);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.chase-tabs__tab[aria-selected='true'] {
+  color: rgb(var(--color-foreground));
+  border-bottom-color: currentColor;
+}
+
+.chase-tabs__footer {
+  margin-top: 2.4rem;
+  text-align: center;
+}
+
+@media screen and (max-width: 989px) {
+  .chase-carousel__track {
+    grid-auto-columns: calc((100% - 2 * var(--chase-gap)) / 2.4);
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .chase-tabs__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .chase-carousel__track {
+    grid-auto-columns: 44vw;
+    margin-right: -1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .chase-carousel__controls {
+    display: none;
+  }
+}

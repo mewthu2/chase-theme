@@ -551,6 +551,9 @@
         "one": "{{ count }} cor",
         "other": "{{ count }} cores"
       }
+    },
+    "tabs": {
+      "view_all": "Ver tudo"
     }
   }
 }
