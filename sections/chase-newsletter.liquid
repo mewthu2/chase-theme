@@ -1,0 +1,59 @@
+{{ 'chase-sections.css' | asset_url | stylesheet_tag }}
+
+<section class="chase-newsletter color-{{ section.settings.color_scheme }} gradient">
+  <div class="chase-newsletter__inner page-width">
+    <div class="chase-newsletter__copy">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="chase-heading chase-heading--section">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="chase-newsletter__text">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+    {%- assign form_id = 'ChaseNewsletter-' | append: section.id -%}
+    {%- form 'customer', id: form_id, class: 'chase-newsletter__form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <div class="chase-newsletter__field">
+        <label class="visually-hidden" for="ChaseNewsletterEmail-{{ section.id }}">{{ 'newsletter.label' | t }}</label>
+        <input
+          id="ChaseNewsletterEmail-{{ section.id }}"
+          type="email"
+          name="contact[email]"
+          value="{{ form.email }}"
+          autocomplete="email"
+          autocorrect="off"
+          autocapitalize="off"
+          placeholder="{{ 'newsletter.label' | t }}"
+          required
+          {% if form.errors %}
+            aria-invalid="true" aria-describedby="ChaseNewsletterError-{{ section.id }}"
+          {% endif %}
+        >
+        <button type="submit" class="chase-btn chase-btn--light">{{ section.settings.button_label | escape }}</button>
+      </div>
+      {%- if form.errors -%}
+        <p id="ChaseNewsletterError-{{ section.id }}" class="chase-newsletter__message" role="alert">
+          {{- form.errors.translated_fields.email | capitalize }}
+          {{ form.errors.messages.email -}}
+        </p>
+      {%- elsif form.posted_successfully? -%}
+        <p class="chase-newsletter__message" role="status">{{ 'newsletter.success' | t }}</p>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Chase: Newsletter",
+  "tag": "div",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Ganhe 10% OFF na primeira compra" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Cadastre-se e receba lançamentos, drops exclusivos e ofertas antes de todo mundo.</p>" },
+    { "type": "text", "id": "button_label", "label": "Texto do botão", "default": "Cadastrar" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de cores", "default": "scheme-3" }
+  ],
+  "presets": [{ "name": "Chase: Newsletter" }]
+}
+{% endschema %}

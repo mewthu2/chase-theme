@@ -1,0 +1,88 @@
+{{ 'chase-sections.css' | asset_url | stylesheet_tag }}
+
+<section class="chase-split color-{{ section.settings.color_scheme }} gradient chase-pad-{{ section.id }}">
+  <div class="{% if section.settings.full_width %}chase-split__inner--full{% else %}page-width{% endif %}">
+    <div class="chase-split__grid">
+      {%- for block in section.blocks -%}
+        <a href="{{ block.settings.link | default: '#' }}" class="chase-split__panel" {{ block.shopify_attributes }}>
+          <div class="chase-split__media">
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 1600
+                | image_tag:
+                  widths: '600, 900, 1200, 1600',
+                  sizes: '(min-width: 750px) 50vw, 100vw',
+                  loading: 'lazy',
+                  alt: block.settings.heading
+              }}
+            {%- else -%}
+              {{ 'lifestyle-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <div class="chase-split__content">
+            {%- if block.settings.heading != blank -%}
+              <h3 class="chase-heading chase-split__heading">{{ block.settings.heading | escape }}</h3>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <p class="chase-split__text">{{ block.settings.text | escape }}</p>
+            {%- endif -%}
+            {%- if block.settings.button_label != blank -%}
+              <span class="chase-btn chase-btn--light">{{ block.settings.button_label | escape }}</span>
+            {%- endif -%}
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% style %}
+  .chase-pad-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .chase-pad-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Chase: Banner duplo",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 2,
+  "settings": [
+    { "type": "checkbox", "id": "full_width", "label": "Largura total", "default": true },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de cores", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "label": "Espaço acima", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Espaço abaixo", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "panel",
+      "name": "Painel",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Imagem" },
+        { "type": "text", "id": "heading", "label": "Título", "default": "Lançamentos" },
+        { "type": "text", "id": "text", "label": "Texto" },
+        { "type": "text", "id": "button_label", "label": "Texto do botão", "default": "Comprar" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Chase: Banner duplo",
+      "blocks": [
+        { "type": "panel", "settings": { "heading": "Lançamentos" } },
+        { "type": "panel", "settings": { "heading": "Mais vendidos" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

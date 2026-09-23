@@ -1,0 +1,67 @@
+{{ 'chase-sections.css' | asset_url | stylesheet_tag }}
+
+<section class="chase-benefits color-{{ section.settings.color_scheme }} gradient">
+  <ul class="chase-benefits__list page-width" role="list">
+    {%- for block in section.blocks -%}
+      <li class="chase-benefits__item" {{ block.shopify_attributes }}>
+        <span class="svg-wrapper chase-benefits__icon" aria-hidden="true">
+          {{- 'icon-' | append: block.settings.icon | append: '.svg' | inline_asset_content -}}
+        </span>
+        <span class="chase-benefits__text">
+          {%- if block.settings.link != blank -%}
+            <a href="{{ block.settings.link }}">{{ block.settings.text | escape }}</a>
+          {%- else -%}
+            {{ block.settings.text | escape }}
+          {%- endif -%}
+        </span>
+      </li>
+    {%- endfor -%}
+  </ul>
+</section>
+
+{% schema %}
+{
+  "name": "Chase: Benefícios",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de cores", "default": "scheme-2" }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefício",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Ícone",
+          "options": [
+            { "value": "truck", "label": "Caminhão" },
+            { "value": "return", "label": "Troca" },
+            { "value": "lock", "label": "Cadeado" },
+            { "value": "price-tag", "label": "Etiqueta" },
+            { "value": "chat-bubble", "label": "Chat" },
+            { "value": "heart", "label": "Coração" }
+          ],
+          "default": "truck"
+        },
+        { "type": "text", "id": "text", "label": "Texto", "default": "Frete grátis acima de R$999" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Chase: Benefícios",
+      "blocks": [
+        { "type": "benefit", "settings": { "icon": "truck", "text": "Frete expresso grátis acima de R$999" } },
+        { "type": "benefit", "settings": { "icon": "return", "text": "Troca fácil em até 30 dias" } },
+        { "type": "benefit", "settings": { "icon": "price-tag", "text": "Até 6x sem juros" } },
+        { "type": "benefit", "settings": { "icon": "lock", "text": "Compra 100% segura" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
