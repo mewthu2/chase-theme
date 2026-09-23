@@ -550,7 +550,10 @@
       "colors": {
         "one": "{{ count }} cor",
         "other": "{{ count }} cores"
-      }
+      },
+      "select_size": "Selecione o tamanho",
+      "add_size": "Adicionar tamanho {{ size }} ao carrinho",
+      "quick_add_label": "Compra rápida: {{ title }}"
     },
     "tabs": {
       "view_all": "Ver tudo"

@@ -41,3 +41,23 @@
   init();
   document.addEventListener('shopify:section:load', init);
 })();
+
+(() => {
+  const init = () => {
+    const wrapper = document.querySelector('.chase-header-transparent');
+    if (!wrapper || wrapper.dataset.chaseTransparent) return;
+    wrapper.dataset.chaseTransparent = 'true';
+
+    const update = () => wrapper.classList.toggle('is-solid', window.scrollY > 10);
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+
+    const setHeight = () =>
+      document.documentElement.style.setProperty('--chase-header-height', `${wrapper.offsetHeight}px`);
+    new ResizeObserver(setHeight).observe(wrapper);
+    setHeight();
+  };
+
+  init();
+  document.addEventListener('shopify:section:load', init);
+})();

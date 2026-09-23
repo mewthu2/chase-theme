@@ -538,7 +538,10 @@
       "colors": {
         "one": "{{ count }} color",
         "other": "{{ count }} colors"
-      }
+      },
+      "select_size": "Select size",
+      "add_size": "Add size {{ size }} to cart",
+      "quick_add_label": "Quick add {{ title }}"
     },
     "tabs": {
       "view_all": "View all"

@@ -24,10 +24,15 @@
   border-bottom-color: currentColor;
 }
 
-.header__icon .svg-wrapper,
-.header__icon .svg-wrapper svg {
+.header__icon .icon {
   width: 2.2rem;
   height: 2.2rem;
+}
+
+.header__icon--cart .icon {
+  width: 5rem;
+  height: 5rem;
+  margin: -0.3rem;
 }
 
 .chase-mega {
@@ -128,4 +133,45 @@
   .announcement-bar .slider-button {
     display: none;
   }
+}
+
+.header__icon--wishlist .icon {
+  fill: currentColor;
+}
+
+.header--top-center .header__inline-menu {
+  margin-top: 0.4rem;
+}
+
+.header--top-center .list-menu--inline {
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.chase-header-transparent {
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.chase-header-transparent:not(.is-solid):not(:hover):not(:focus-within):not(:has(details[open])) {
+  background: transparent;
+  --color-foreground: 255, 255, 255;
+  border-bottom-color: transparent;
+}
+
+.chase-header-transparent--invert-logo:not(.is-solid):not(:hover):not(:focus-within):not(:has(details[open]))
+  .header__heading-logo {
+  filter: brightness(0) invert(1);
+}
+
+.chase-header-transparent:not(.is-solid):not(:hover):not(:focus-within):not(:has(details[open])) .cart-count-bubble {
+  background: #fff;
+  color: #000;
+}
+
+body:has(.chase-header-transparent) #MainContent > .shopify-section:first-child:has(.chase-hero) {
+  margin-top: calc(-1 * var(--chase-header-height, 0px));
+}
+
+body:has(.chase-header-transparent) .chase-hero--full {
+  min-height: calc(100svh - var(--header-bottom-position, 10rem) + var(--chase-header-height, 0px));
 }

@@ -1,0 +1,65 @@
+{% doc %}
+  Renders the quick add size picker for a product card: on hover (desktop) the sizes appear over
+  the image and one click adds that size to the cart; on touch screens a bag button opens the picker.
+  Renders nothing when the product has no size option, so the card falls back to Dawn's quick add.
+
+  @param {product} product - The product
+  @param {string} section_id - The id of the section rendering the card
+
+  @example
+  {% render 'chase-card-sizes', product: card_product, section_id: section.id %}
+{% enddoc %}
+{%- liquid
+  assign size_option = null
+  for option in product.options_with_values
+    assign option_key = option.name | downcase | strip
+    if option_key == 'tamanho' or option_key == 'tamanhos' or option_key == 'size' or option_key == 'tam'
+      assign size_option = option
+      break
+    endif
+  endfor
+-%}
+{%- if size_option and product.variants.size > 1 -%}
+  {%- assign panel_id = 'ChaseSizes-' | append: section_id | append: '-' | append: product.id -%}
+  <chase-quick-sizes class="chase-quick-sizes" data-product-url="{{ product.url }}">
+    <button
+      type="button"
+      class="chase-quick-sizes__toggle"
+      aria-expanded="false"
+      aria-controls="{{ panel_id }}"
+      aria-label="{{ 'chase.card.quick_add_label' | t: title: product.title | escape }}"
+    >
+      {{- 'chase-icon-bag.svg' | inline_asset_content -}}
+    </button>
+    <div class="chase-quick-sizes__panel" id="{{ panel_id }}">
+      <p class="chase-quick-sizes__title">
+        {%- if product.available -%}
+          {{ 'chase.card.select_size' | t }}
+        {%- else -%}
+          {{ 'chase.card.sold_out' | t }}
+        {%- endif -%}
+      </p>
+      <ul class="chase-quick-sizes__list" role="list">
+        {%- for value in size_option.values -%}
+          {%- assign size_variant = value.variant -%}
+          <li>
+            <button
+              type="button"
+              class="chase-quick-sizes__size"
+              {% if size_variant %}
+                data-variant-id="{{ size_variant.id }}"
+              {% endif %}
+              {% unless size_variant.available %}
+                disabled
+              {% endunless %}
+              aria-label="{{ 'chase.card.add_size' | t: size: value.name | escape }}"
+            >
+              {{- value.name | escape -}}
+            </button>
+          </li>
+        {%- endfor -%}
+      </ul>
+      <p class="chase-quick-sizes__error" role="alert" hidden></p>
+    </div>
+  </chase-quick-sizes>
+{%- endif -%}

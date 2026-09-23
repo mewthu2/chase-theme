@@ -1,3 +1,4 @@
+<script src="{{ 'chase-footer.js' | asset_url }}" defer="defer"></script>
 {% comment %}theme-check-disable UndefinedObject{% endcomment %}
 {{ 'section-footer.css' | asset_url | stylesheet_tag }}
 {{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
@@ -75,7 +76,19 @@
                   style="--animation-order: {{ forloop.index }};"
                 {% endif %}
               >
-                {%- if block.settings.heading != blank -%}
+                {%- liquid
+                  assign chase_accordion = false
+                  if block.settings.heading != blank and block.type == 'link_list' or block.type == 'text'
+                    assign chase_accordion = true
+                  endif
+                -%}
+                {%- if chase_accordion -%}
+                  <details class="chase-footer-accordion">
+                  <summary class="chase-footer-accordion__summary">
+                    <h2 class="footer-block__heading inline-richtext">{{- block.settings.heading -}}</h2>
+                    <span class="chase-footer-accordion__icon" aria-hidden="true"></span>
+                  </summary>
+                {%- elsif block.settings.heading != blank -%}
                   <h2 class="footer-block__heading inline-richtext">{{- block.settings.heading -}}</h2>
                 {%- endif -%}
 
@@ -154,6 +167,9 @@
                       {%- endif -%}
                     </div>
                 {%- endcase -%}
+                {%- if chase_accordion -%}
+                  </details>
+                {%- endif -%}
               </div>
             {%- endfor -%}
           </div>

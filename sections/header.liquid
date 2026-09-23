@@ -148,7 +148,7 @@
   {% if header_tag == 'sticky-header' %}
     data-sticky-type="{{ section.settings.sticky_header_type }}"
   {% endif %}
-  class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}"
+  class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}{% if section.settings.chase_transparent_home and request.page_type == 'index' %} chase-header-transparent{% if section.settings.chase_invert_logo %} chase-header-transparent--invert-logo{% endif %}{% endif %}"
 >
   {%- liquid
     assign social_links = false
@@ -534,7 +534,7 @@
           "label": "t:sections.header.settings.logo_position.options__4.label"
         }
       ],
-      "default": "middle-left",
+      "default": "top-center",
       "label": "t:sections.header.settings.logo_position.label",
       "info": "t:sections.header.settings.logo_help.content"
     },
@@ -579,6 +579,23 @@
       ],
       "default": "dropdown",
       "label": "t:sections.header.settings.menu_type_desktop.label"
+    },
+    {
+      "type": "header",
+      "content": "Chase: header transparente"
+    },
+    {
+      "type": "checkbox",
+      "id": "chase_transparent_home",
+      "label": "Header transparente no topo da home",
+      "info": "Fica sobre o hero (Chase: Hero precisa ser a primeira seção) e ganha fundo ao rolar ou passar o mouse.",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "chase_invert_logo",
+      "label": "Deixar o logo branco enquanto transparente",
+      "default": true
     },
     {
       "type": "select",

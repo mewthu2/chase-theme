@@ -307,7 +307,14 @@
             </div>
           </div>
           {% assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id %}
-          {% if quick_add == 'standard' %}
+          {%- capture chase_sizes -%}
+            {%- if quick_add == 'standard' -%}
+              {%- render 'chase-card-sizes', product: card_product, section_id: section_id -%}
+            {%- endif -%}
+          {%- endcapture -%}
+          {% if chase_sizes != blank %}
+            {{ chase_sizes }}
+          {% elsif quick_add == 'standard' %}
             <div class="quick-add no-js-hidden">
               {%- liquid
                 assign qty_rules = false
