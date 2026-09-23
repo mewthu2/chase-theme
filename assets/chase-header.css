@@ -1,0 +1,131 @@
+.header__menu-item {
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: rgb(var(--color-foreground));
+}
+
+.header__menu-item .icon-caret {
+  display: none;
+}
+
+.header__menu-item span {
+  text-decoration: none;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.header__menu-item:hover span,
+.mega-menu[open] .header__menu-item span,
+.header__active-menu-item {
+  text-decoration: none;
+  border-bottom-color: currentColor;
+}
+
+.header__icon .svg-wrapper,
+.header__icon .svg-wrapper svg {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.chase-mega {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+}
+
+.chase-mega--has-promos {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.chase-mega .mega-menu__list {
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 1.6rem 3.2rem;
+  padding: 0;
+  margin: 0;
+}
+
+.chase-mega .mega-menu__link {
+  font-size: 1.4rem;
+  padding: 0.5rem 0;
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+.chase-mega .mega-menu__link:hover {
+  color: rgb(var(--color-foreground));
+}
+
+.chase-mega .mega-menu__link--level-2 {
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: rgb(var(--color-foreground));
+  margin-bottom: 0.4rem;
+}
+
+.chase-mega__promos {
+  display: flex;
+  gap: 1.6rem;
+}
+
+.chase-mega-promo {
+  display: block;
+  width: 26rem;
+  color: rgb(var(--color-foreground));
+  text-decoration: none;
+}
+
+.chase-mega-promo__media {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--chase-grey);
+}
+
+.chase-mega-promo__media img,
+.chase-mega-promo__media svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.chase-mega-promo:hover img {
+  transform: scale(1.03);
+}
+
+.chase-mega-promo__heading {
+  display: block;
+  margin-top: 1rem;
+  font-size: 1.3rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.mega-menu__content {
+  box-shadow: 0 1.2rem 2.4rem rgba(0, 0, 0, 0.06);
+}
+
+.announcement-bar__message {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  min-height: 3.6rem;
+  padding: 0.9rem 0;
+}
+
+.menu-drawer__menu-item {
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+@media screen and (max-width: 749px) {
+  .announcement-bar .slider-button {
+    display: none;
+  }
+}

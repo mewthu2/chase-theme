@@ -1,3 +1,5 @@
+{{ 'chase-header.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'chase-header.js' | asset_url }}" defer="defer"></script>
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -281,6 +283,13 @@
         {%- endif -%}
       </div>
       {% render 'header-search', input_id: 'Search-In-Modal' %}
+
+      {%- if settings.chase_wishlist_url != blank -%}
+        <a href="{{ settings.chase_wishlist_url }}" class="header__icon header__icon--wishlist link focus-inset">
+          <span class="svg-wrapper">{{ 'icon-heart.svg' | inline_asset_content }}</span>
+          <span class="visually-hidden">{{ 'chase.header.wishlist' | t }}</span>
+        </a>
+      {%- endif -%}
 
       {%- if shop.customer_accounts_enabled -%}
         <shopify-account
@@ -681,6 +690,35 @@
   "blocks": [
     {
       "type": "@app"
+    },
+    {
+      "type": "promo",
+      "name": "Imagem do mega-menu",
+      "limit": 12,
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_item",
+          "label": "Item do menu",
+          "info": "Título exato do item de primeiro nível (ex.: Roupas). Máximo de 2 imagens por item."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagem"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Título",
+          "default": "Novo drop"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
     }
   ]
 }

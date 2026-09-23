@@ -30,8 +30,21 @@
                 class="mega-menu__content color-{{ section.settings.menu_color_scheme }} gradient motion-reduce global-settings-popup"
                 tabindex="-1"
               >
+                {%- liquid
+                  assign menu_key = link.title | downcase | strip
+                  assign promo_count = 0
+                  for block in section.blocks
+                    if block.type == 'promo'
+                      assign promo_key = block.settings.menu_item | downcase | strip
+                      if promo_key == menu_key
+                        assign promo_count = promo_count | plus: 1
+                      endif
+                    endif
+                  endfor
+                -%}
+                <div class="chase-mega page-width{% if promo_count > 0 %} chase-mega--has-promos{% endif %}">
                 <ul
-                  class="mega-menu__list page-width{% if link.levels == 1 %} mega-menu__list--condensed{% endif %}"
+                  class="mega-menu__list{% if link.levels == 1 %} mega-menu__list--condensed{% endif %}"
                   role="list"
                 >
                   {%- for childlink in link.links -%}
@@ -67,6 +80,31 @@
                     </li>
                   {%- endfor -%}
                 </ul>
+                {%- if promo_count > 0 -%}
+                  <div class="chase-mega__promos">
+                    {%- assign shown = 0 -%}
+                    {%- for block in section.blocks -%}
+                      {%- if block.type != 'promo' or shown >= 2 -%}{%- continue -%}{%- endif -%}
+                      {%- assign promo_key = block.settings.menu_item | downcase | strip -%}
+                      {%- if promo_key == menu_key -%}
+                        {%- assign shown = shown | plus: 1 -%}
+                        <a href="{{ block.settings.link | default: link.url }}" class="chase-mega-promo" {{ block.shopify_attributes }}>
+                          <div class="chase-mega-promo__media">
+                            {%- if block.settings.image != blank -%}
+                              {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', sizes: '280px', widths: '300, 600', alt: block.settings.heading | escape }}
+                            {%- else -%}
+                              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                            {%- endif -%}
+                          </div>
+                          {%- if block.settings.heading != blank -%}
+                            <span class="chase-mega-promo__heading">{{ block.settings.heading | escape }}</span>
+                          {%- endif -%}
+                        </a>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+                </div>
               </div>
             </details>
           </header-menu>
