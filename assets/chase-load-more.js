@@ -45,8 +45,6 @@ if (!customElements.get('chase-load-more')) {
             this.button.remove();
           }
 
-          const pageUrl = new URL(nextUrl, window.location.origin);
-          window.history.replaceState(window.history.state, '', pageUrl.pathname + pageUrl.search);
         } catch (error) {
           console.error(error);
           window.location.href = nextUrl;

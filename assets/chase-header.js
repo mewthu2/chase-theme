@@ -6,6 +6,12 @@
     if (details.dataset.chaseHover) return;
     details.dataset.chaseHover = 'true';
     const li = details.closest('li') || details;
+    const summary = details.querySelector('summary');
+
+    summary?.addEventListener('click', (event) => {
+      if (!desktop.matches || details.dataset.chaseHovered !== 'true') return;
+      event.preventDefault();
+    });
 
     li.addEventListener('mouseenter', () => {
       if (!desktop.matches) return;
@@ -14,6 +20,7 @@
         if (other !== details) other.removeAttribute('open');
       });
       details.setAttribute('open', '');
+      details.dataset.chaseHovered = 'true';
       details.querySelector('summary')?.setAttribute('aria-expanded', 'true');
     });
 
@@ -23,6 +30,7 @@
         details,
         setTimeout(() => {
           details.removeAttribute('open');
+          details.dataset.chaseHovered = 'false';
           details.querySelector('summary')?.setAttribute('aria-expanded', 'false');
         }, 150)
       );

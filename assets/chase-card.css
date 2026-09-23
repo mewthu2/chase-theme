@@ -88,6 +88,8 @@
 }
 
 .chase-swatches {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-wrap: wrap;
   align-items: center;

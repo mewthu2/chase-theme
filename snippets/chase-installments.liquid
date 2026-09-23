@@ -16,8 +16,9 @@
   assign count = price | divided_by: min_cents | floor | at_most: max_installments
 -%}
 {%- if count >= 2 -%}
-  {%- assign installment = price | divided_by: count -%}
+  {%- assign installment = price | times: 1.0 | divided_by: count | ceil -%}
+  {%- assign installment_money = installment | money -%}
   <p class="chase-installments">
-    {{ 'chase.product.installments_html' | t: count: count, amount: installment | money }}
+    {{ 'chase.product.installments_html' | t: count: count, amount: installment_money }}
   </p>
 {%- endif -%}

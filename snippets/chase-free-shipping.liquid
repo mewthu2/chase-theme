@@ -20,7 +20,8 @@
       {%- if remaining <= 0 -%}
         {{ 'chase.cart.free_shipping_done' | t }}
       {%- else -%}
-        {{ 'chase.cart.free_shipping_remaining_html' | t: amount: remaining | money }}
+        {%- assign remaining_money = remaining | money -%}
+        {{ 'chase.cart.free_shipping_remaining_html' | t: amount: remaining_money }}
       {%- endif -%}
     </p>
     <div
