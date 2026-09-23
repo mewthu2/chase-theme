@@ -16,6 +16,7 @@
         <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
         {{- collection.title | escape -}}
       </h1>
+      <p class="chase-collection-count">{{ 'chase.collection.count' | t: count: collection.products_count }}</p>
 
       {%- if section.settings.show_collection_description -%}
         <div class="collection-hero__description rte">{{ collection.description }}</div>

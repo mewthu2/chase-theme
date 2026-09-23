@@ -542,6 +542,14 @@
     },
     "tabs": {
       "view_all": "View all"
+    },
+    "collection": {
+      "count": {
+        "one": "{{ count }} product",
+        "other": "{{ count }} products"
+      },
+      "showing": "Showing {{ shown }} of {{ total }} products",
+      "load_more": "Load more"
     }
   }
 }

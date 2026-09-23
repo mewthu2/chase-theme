@@ -1,0 +1,39 @@
+{% doc %}
+  Renders a "load more" button with a progress indicator for paginated product grids.
+  Falls back to standard pagination when JavaScript is unavailable.
+
+  @param {object} paginate - The paginate object
+  @param {string} section_id - The id of the section that renders the grid
+
+  @example
+  {% render 'chase-load-more', paginate: paginate, section_id: section.id %}
+{% enddoc %}
+{%- liquid
+  assign shown = paginate.current_page | times: paginate.page_size | at_most: paginate.items
+  assign percent = shown | times: 100 | divided_by: paginate.items
+-%}
+{%- if paginate.items > 0 -%}
+  <chase-load-more
+    class="chase-load-more"
+    data-section-id="{{ section_id }}"
+    {% if paginate.next %}
+      data-next-url="{{ paginate.next.url }}"
+    {% endif %}
+    data-total="{{ paginate.items }}"
+  >
+    <p class="chase-load-more__status" aria-live="polite">
+      {{ 'chase.collection.showing' | t: shown: shown, total: paginate.items }}
+    </p>
+    <div class="chase-load-more__bar" aria-hidden="true">
+      <span style="width: {{ percent }}%;"></span>
+    </div>
+    {%- if paginate.next -%}
+      <button type="button" class="chase-btn chase-btn--dark chase-load-more__button">
+        <span>{{ 'chase.collection.load_more' | t }}</span>
+      </button>
+      <noscript>
+        {% render 'pagination', paginate: paginate, anchor: '' %}
+      </noscript>
+    {%- endif -%}
+  </chase-load-more>
+{%- endif -%}

@@ -1,4 +1,6 @@
 {{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'chase-collection.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'chase-load-more.js' | asset_url }}" defer="defer"></script>
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 
@@ -188,7 +190,7 @@
               </ul>
 
               {%- if paginate.pages > 1 -%}
-                {% render 'pagination', paginate: paginate, anchor: '' %}
+                {% render 'chase-load-more', paginate: paginate, section_id: section.id %}
               {%- endif -%}
             </div>
           {%- endif -%}

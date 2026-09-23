@@ -554,6 +554,14 @@
     },
     "tabs": {
       "view_all": "Ver tudo"
+    },
+    "collection": {
+      "count": {
+        "one": "{{ count }} produto",
+        "other": "{{ count }} produtos"
+      },
+      "showing": "Mostrando {{ shown }} de {{ total }} produtos",
+      "load_more": "Carregar mais"
     }
   }
 }
