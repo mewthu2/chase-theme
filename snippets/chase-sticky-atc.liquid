@@ -1,0 +1,29 @@
+{% doc %}
+  Renders a mobile sticky add-to-cart bar that proxies the main product form submit button.
+
+  @param {product} product - The product
+  @param {string} section_id - The main product section id
+
+  @example
+  {% render 'chase-sticky-atc', product: product, section_id: section.id %}
+{% enddoc %}
+{%- assign variant = product.selected_or_first_available_variant -%}
+<chase-sticky-atc class="chase-sticky-atc" data-section-id="{{ section_id }}" aria-hidden="true" inert>
+  <div class="chase-sticky-atc__info">
+    <span class="chase-sticky-atc__title">{{ product.title | escape }}</span>
+    <span class="chase-sticky-atc__price">{{ variant.price | money }}</span>
+  </div>
+  <button
+    type="button"
+    class="chase-btn chase-btn--dark chase-sticky-atc__button"
+    {% unless variant.available %}
+      disabled
+    {% endunless %}
+  >
+    {%- if variant.available -%}
+      {{ 'products.product.add_to_cart' | t }}
+    {%- else -%}
+      {{ 'products.product.sold_out' | t }}
+    {%- endif -%}
+  </button>
+</chase-sticky-atc>

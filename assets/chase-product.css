@@ -1,0 +1,198 @@
+@media screen and (min-width: 750px) {
+  .product--columns .product__media-list {
+    gap: 0.4rem;
+  }
+
+  .product__info-wrapper {
+    padding-left: 4rem;
+  }
+
+  .product__info-container--sticky {
+    top: calc(var(--header-height, 8rem) + 2.4rem);
+  }
+}
+
+.product__media-list .product__media-item,
+.product__media-list .product-media-container {
+  background: var(--chase-grey);
+}
+
+.product__title h1,
+.product__title .h1 {
+  font-size: clamp(2.4rem, 2.4vw, 3.2rem);
+  line-height: 1.05;
+  margin-bottom: 0.4rem;
+}
+
+.product__info-container > * + * {
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.product .price--large {
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.product .price--large .price-item--regular {
+  font-size: 1.8rem;
+}
+
+.product .price__badge-sale,
+.product .price__badge-sold-out {
+  border-radius: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.chase-installments {
+  margin: 0.4rem 0 0;
+  font-size: 1.3rem;
+  color: var(--chase-muted);
+}
+
+.chase-installments strong {
+  color: rgb(var(--color-foreground));
+  font-weight: 600;
+}
+
+.product-form__input .form__label {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 1rem;
+}
+
+.product-form__input--pill input[type='radio'] + label {
+  min-width: 5.2rem;
+  height: 4.8rem;
+  margin: 0 0.4rem 0.8rem 0;
+  padding: 0 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.product-form__input--pill input[type='radio'] + label:hover {
+  border-color: rgb(var(--color-foreground));
+}
+
+.product-form__input--pill input[type='radio']:checked + label {
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+  border-color: rgb(var(--color-foreground));
+}
+
+.product-form__input--pill input[type='radio'].disabled + label,
+.product-form__input--pill input[type='radio']:disabled + label {
+  color: rgba(var(--color-foreground), 0.35);
+  border-color: rgba(var(--color-foreground), 0.12);
+  background: linear-gradient(
+    to top right,
+    transparent calc(50% - 0.5px),
+    rgba(var(--color-foreground), 0.25) calc(50% - 0.5px),
+    rgba(var(--color-foreground), 0.25) calc(50% + 0.5px),
+    transparent calc(50% + 0.5px)
+  );
+  text-decoration: none;
+}
+
+.product-form__input--swatch .swatch-input__label {
+  --swatch-input--size: 4rem;
+}
+
+.product-popup-modal__button {
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-underline-offset: 0.3rem;
+  min-height: auto;
+  padding: 0;
+}
+
+.product-form__submit {
+  min-height: 5.6rem;
+  font-size: 1.4rem;
+}
+
+.product__accordion {
+  margin: 0;
+}
+
+.product__accordion .summary__title .accordion__title {
+  font-family: var(--font-body-family);
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.product__accordion .accordion__content {
+  font-size: 1.4rem;
+  padding-bottom: 1.6rem;
+}
+
+.chase-sticky-atc {
+  position: fixed;
+  z-index: 20;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1rem 1.5rem calc(1rem + env(safe-area-inset-bottom));
+  background: rgb(var(--color-background));
+  box-shadow: 0 -0.2rem 1.2rem rgba(0, 0, 0, 0.08);
+  transform: translateY(110%);
+  transition: transform 0.25s ease;
+}
+
+.chase-sticky-atc.is-visible {
+  transform: none;
+}
+
+.chase-sticky-atc__info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.chase-sticky-atc__title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chase-sticky-atc__price {
+  font-size: 1.3rem;
+  color: var(--chase-muted);
+}
+
+.chase-sticky-atc__button {
+  flex-shrink: 0;
+  min-height: 4.4rem;
+  padding: 0 2rem;
+}
+
+.chase-sticky-atc__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media screen and (min-width: 750px) {
+  .chase-sticky-atc {
+    display: none !important;
+  }
+}

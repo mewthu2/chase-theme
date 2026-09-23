@@ -550,6 +550,9 @@
       },
       "showing": "Showing {{ shown }} of {{ total }} products",
       "load_more": "Load more"
+    },
+    "product": {
+      "installments_html": "or {{ count }}x of <strong>{{ amount }}</strong> interest-free"
     }
   }
 }

@@ -10,6 +10,7 @@
   {% endif %}
 >
   {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+  {{ 'chase-product.css' | asset_url | stylesheet_tag }}
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
   {{ 'component-price.css' | asset_url | stylesheet_tag }}
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
@@ -114,6 +115,13 @@
                       show_badges: true,
                       price_class: 'price--large'
                     -%}
+                    {%- if block.settings.show_installments -%}
+                      {%- render 'chase-installments',
+                        price: product.selected_or_first_available_variant.price,
+                        max_installments: block.settings.max_installments,
+                        min_installment: block.settings.min_installment
+                      -%}
+                    {%- endif -%}
                   </div>
                   {%- if product.quantity_price_breaks_configured? -%}
                     <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
@@ -223,6 +231,9 @@
                         {{- 'icon-caret.svg' | inline_asset_content -}}
                       </summary>
                       <div class="accordion__content rte" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
+                        {%- if block.settings.chase_show_description -%}
+                          {{ product.description }}
+                        {%- endif -%}
                         {{ block.settings.content }}
                         {{ block.settings.page.content }}
                       </div>
@@ -753,6 +764,9 @@
   </product-component>
 </product-info>
 
+{%- render 'chase-sticky-atc', product: product, section_id: section.id -%}
+<script src="{{ 'chase-sticky-atc.js' | asset_url }}" defer="defer"></script>
+
 {% schema %}
 {
   "name": "t:sections.main-product.name",
@@ -802,7 +816,12 @@
     {
       "type": "price",
       "name": "t:sections.main-product.blocks.price.name",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        { "type": "checkbox", "id": "show_installments", "label": "Mostrar parcelamento", "default": true },
+        { "type": "range", "id": "max_installments", "label": "Máximo de parcelas sem juros", "min": 2, "max": 12, "step": 1, "default": 6 },
+        { "type": "range", "id": "min_installment", "label": "Valor mínimo da parcela (R$)", "min": 10, "max": 200, "step": 10, "default": 50 }
+      ]
     },
     {
       "type": "sku",
@@ -1020,6 +1039,12 @@
       "type": "collapsible_tab",
       "name": "t:sections.main-product.blocks.collapsible_tab.name",
       "settings": [
+        {
+          "type": "checkbox",
+          "id": "chase_show_description",
+          "label": "Mostrar descrição do produto",
+          "default": false
+        },
         {
           "type": "text",
           "id": "heading",

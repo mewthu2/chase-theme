@@ -3,88 +3,110 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": {
-          "type": "text",
-          "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "uppercase"
-          }
-        },
         "title": {
-          "type": "title"
+          "type": "title",
+          "settings": {}
         },
         "price": {
-          "type": "price"
+          "type": "price",
+          "settings": {
+            "show_installments": true,
+            "max_installments": 6,
+            "min_installment": 50
+          }
         },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
             "picker_type": "button",
-            "swatch_shape": "circle"
+            "swatch_shape": "square"
           }
         },
-        "quantity_selector": {
-          "type": "quantity_selector"
+        "size_guide": {
+          "type": "popup",
+          "settings": {
+            "text": "Guia de tamanhos",
+            "page": ""
+          }
         },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
-            "show_dynamic_checkout": true,
+            "show_dynamic_checkout": false,
             "show_gift_card_recipient": true
           }
         },
-        "description": {
-          "type": "description"
+        "tab_description": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Descrição",
+            "icon": "none",
+            "content": "",
+            "page": "",
+            "chase_show_description": true
+          }
+        },
+        "tab_care": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Composição e cuidados",
+            "icon": "none",
+            "content": "<p>Consulte a etiqueta do produto. Lave à mão ou na máquina em ciclo delicado, com água fria. Não use alvejante nem secadora.</p>",
+            "page": ""
+          }
+        },
+        "tab_returns": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Trocas e devoluções",
+            "icon": "none",
+            "content": "<p>Primeira troca grátis em até 30 dias após o recebimento.</p>",
+            "page": ""
+          }
         },
         "share": {
           "type": "share",
           "settings": {
-            "share_label": "Share"
+            "share_label": "Compartilhar"
           }
         }
       },
       "block_order": [
-        "vendor",
         "title",
         "price",
         "variant_picker",
-        "quantity_selector",
+        "size_guide",
         "buy_buttons",
-        "description",
+        "tab_description",
+        "tab_care",
+        "tab_returns",
         "share"
       ],
       "settings": {
         "enable_sticky_info": true,
         "color_scheme": "scheme-1",
         "media_position": "left",
-        "gallery_layout": "stacked",
+        "gallery_layout": "columns",
         "media_size": "large",
         "constrain_to_viewport": true,
-        "media_fit": "contain",
+        "media_fit": "cover",
         "image_zoom": "lightbox",
         "mobile_thumbnails": "hide",
         "hide_variants": true,
         "enable_video_looping": false,
-        "padding_top": 36,
+        "padding_top": 0,
         "padding_bottom": 12
-      }
-    },
-    "disclosures": {
-      "type": "disclosures",
-      "settings": {
-        "padding_top": 36,
-        "padding_bottom": 0
       }
     },
     "related-products": {
       "type": "related-products",
       "settings": {
-        "heading": "You may also like",
+        "heading": "Você também pode gostar",
         "heading_size": "h2",
-        "products_to_show": 4,
+        "products_to_show": 8,
         "columns_desktop": 4,
         "color_scheme": "scheme-1",
-        "image_ratio": "square",
+        "image_ratio": "portrait",
         "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
@@ -93,11 +115,29 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
+    },
+    "complete-look": {
+      "type": "chase-complete-look",
+      "settings": {
+        "heading": "Complete o look",
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "padding_top": 48,
+        "padding_bottom": 24
+      }
+    },
+    "disclosures": {
+      "type": "disclosures",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 0
+      }
     }
   },
   "order": [
     "main",
     "disclosures",
+    "complete-look",
     "related-products"
   ]
 }

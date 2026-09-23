@@ -1,0 +1,23 @@
+{% doc %}
+  Renders an interest-free installments line, e.g. "ou 6x de R$ 54,83 sem juros".
+  Renders nothing when fewer than 2 installments are possible.
+
+  @param {number} price - Price in cents
+  @param {number} [max_installments] - Maximum number of installments (default 6)
+  @param {number} [min_installment] - Minimum installment value in currency units (default 50)
+
+  @example
+  {% render 'chase-installments', price: product.selected_or_first_available_variant.price, max_installments: 6, min_installment: 50 %}
+{% enddoc %}
+{%- liquid
+  assign max_installments = max_installments | default: 6
+  assign min_installment = min_installment | default: 50
+  assign min_cents = min_installment | times: 100 | at_least: 1
+  assign count = price | divided_by: min_cents | floor | at_most: max_installments
+-%}
+{%- if count >= 2 -%}
+  {%- assign installment = price | divided_by: count -%}
+  <p class="chase-installments">
+    {{ 'chase.product.installments_html' | t: count: count, amount: installment | money }}
+  </p>
+{%- endif -%}

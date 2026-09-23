@@ -562,6 +562,9 @@
       },
       "showing": "Mostrando {{ shown }} de {{ total }} produtos",
       "load_more": "Carregar mais"
+    },
+    "product": {
+      "installments_html": "ou {{ count }}x de <strong>{{ amount }}</strong> sem juros"
     }
   }
 }
