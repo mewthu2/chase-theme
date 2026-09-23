@@ -553,6 +553,11 @@
     },
     "product": {
       "installments_html": "or {{ count }}x of <strong>{{ amount }}</strong> interest-free"
+    },
+    "cart": {
+      "free_shipping_done": "You have unlocked free shipping!",
+      "free_shipping_remaining_html": "You are <strong>{{ amount }}</strong> away from free shipping",
+      "free_shipping_label": "Free shipping progress"
     }
   }
 }

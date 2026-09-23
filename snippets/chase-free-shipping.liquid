@@ -1,0 +1,37 @@
+{% doc %}
+  Renders a free shipping progress bar based on the "chase_free_shipping_threshold" theme setting (BRL).
+  Renders nothing when the threshold is 0 or the cart is empty.
+
+  @param {object} cart - The cart object
+
+  @example
+  {% render 'chase-free-shipping', cart: cart %}
+{% enddoc %}
+{%- liquid
+  assign threshold = settings.chase_free_shipping_threshold | default: 0 | times: 100
+-%}
+{%- if threshold > 0 and cart.item_count > 0 -%}
+  {%- liquid
+    assign remaining = threshold | minus: cart.total_price
+    assign percent = cart.total_price | times: 100 | divided_by: threshold | at_most: 100
+  -%}
+  <div class="chase-free-shipping{% if remaining <= 0 %} chase-free-shipping--done{% endif %}">
+    <p class="chase-free-shipping__text">
+      {%- if remaining <= 0 -%}
+        {{ 'chase.cart.free_shipping_done' | t }}
+      {%- else -%}
+        {{ 'chase.cart.free_shipping_remaining_html' | t: amount: remaining | money }}
+      {%- endif -%}
+    </p>
+    <div
+      class="chase-free-shipping__bar"
+      role="progressbar"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="{{ percent }}"
+      aria-label="{{ 'chase.cart.free_shipping_label' | t }}"
+    >
+      <span style="width: {{ percent }}%;"></span>
+    </div>
+  </div>
+{%- endif -%}

@@ -565,6 +565,11 @@
     },
     "product": {
       "installments_html": "ou {{ count }}x de <strong>{{ amount }}</strong> sem juros"
+    },
+    "cart": {
+      "free_shipping_done": "Você ganhou frete grátis!",
+      "free_shipping_remaining_html": "Faltam <strong>{{ amount }}</strong> para ganhar frete grátis",
+      "free_shipping_label": "Progresso para frete grátis"
     }
   }
 }
