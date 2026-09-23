@@ -1466,5 +1466,51 @@
         "label": "t:settings_schema.customer_accounts.settings.customer_account_menu.label"
       }
     ]
+  },
+  {
+    "name": "Chase",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Estilo"
+      },
+      {
+        "type": "color",
+        "id": "chase_accent",
+        "label": "Cor de destaque (promoções)",
+        "default": "#D0021B"
+      },
+      {
+        "type": "header",
+        "content": "Carrinho"
+      },
+      {
+        "type": "number",
+        "id": "chase_free_shipping_threshold",
+        "label": "Valor para frete grátis (R$)",
+        "info": "0 desativa a barra de frete grátis",
+        "default": 999
+      },
+      {
+        "type": "header",
+        "content": "Produtos"
+      },
+      {
+        "type": "text",
+        "id": "chase_new_tag",
+        "label": "Tag que marca produto como NOVO",
+        "default": "novo"
+      },
+      {
+        "type": "header",
+        "content": "Header"
+      },
+      {
+        "type": "url",
+        "id": "chase_wishlist_url",
+        "label": "Link da página de favoritos",
+        "info": "Deixe vazio para esconder o ícone"
+      }
+    ]
   }
 ]
