@@ -53,23 +53,36 @@
     },
     "header": {
       "type": "header",
+      "blocks": {
+        "promo_pYHtxQ": {
+          "type": "promo",
+          "settings": {
+            "menu_item": "Novidades",
+            "image": "shopify://shop_images/IMG_9444_3.jpg",
+            "heading": "New drop!",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "promo_pYHtxQ"
+      ],
       "settings": {
-        "color_scheme": "scheme-1",
-        "menu_color_scheme": "scheme-1",
         "logo_position": "top-center",
+        "mobile_logo_position": "center",
         "menu": "main-menu",
         "menu_type_desktop": "mega",
+        "chase_transparent_home": true,
+        "chase_invert_logo": true,
         "sticky_header_type": "on-scroll-up",
         "show_line_separator": true,
         "color_scheme": "scheme-1",
         "menu_color_scheme": "scheme-1",
-        "enable_country_selector": false,
-        "enable_language_selector": false,
+        "enable_country_selector": true,
+        "enable_language_selector": true,
         "margin_bottom": 0,
         "padding_top": 12,
-        "padding_bottom": 12,
-        "chase_transparent_home": true,
-        "chase_invert_logo": true
+        "padding_bottom": 12
       }
     }
   },
