@@ -61,6 +61,44 @@
       class="product__media-list contains-media grid grid--peek list-unstyled slider slider--mobile"
       role="list"
     >
+      {%- liquid
+        assign chase_video = null
+        if section.settings.chase_video_first
+          for chase_media in product.media
+            if chase_media.media_type == 'video' or chase_media.media_type == 'external_video'
+              assign chase_video = chase_media
+              break
+            endif
+          endfor
+          if chase_video and chase_video.id == product.selected_or_first_available_variant.featured_media.id
+            assign chase_video = null
+          endif
+        endif
+      -%}
+      {%- if chase_video -%}
+        <li
+          id="Slide-{{ section.id }}-{{ chase_video.id }}"
+          class="product__media-item grid__item slider__slide{% if single_media_visible %} product__media-item--single{% endif %} product__media-item--full{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+          data-media-id="{{ section.id }}-{{ chase_video.id }}"
+        >
+          {%- assign media_position = 1 -%}
+          {% render 'product-thumbnail',
+            media: chase_video,
+            media_count: media_count,
+            position: media_position,
+            desktop_layout: section.settings.gallery_layout,
+            mobile_layout: section.settings.mobile_thumbnails,
+            loop: section.settings.enable_video_looping,
+            autoplay_video: section.settings.chase_autoplay_video,
+            modal_id: section.id,
+            xr_button: true,
+            media_width: media_width,
+            media_fit: section.settings.media_fit,
+            constrain_to_viewport: section.settings.constrain_to_viewport,
+            lazy_load: false
+          %}
+        </li>
+      {%- endif -%}
       {%- if product.selected_or_first_available_variant.featured_media != null -%}
         {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
         <li
@@ -68,7 +106,7 @@
           class="product__media-item grid__item slider__slide is-active{% if single_media_visible %} product__media-item--single{% endif %}{% if featured_media.media_type != 'image' %} product__media-item--full{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
           data-media-id="{{ section.id }}-{{ featured_media.id }}"
         >
-          {%- assign media_position = 1 -%}
+          {%- assign media_position = media_position | default: 0 | plus: 1 -%}
           {% render 'product-thumbnail',
             media: featured_media,
             media_count: media_count,
@@ -95,6 +133,7 @@
           {% continue %}
         {% endif %}
 
+        {%- if chase_video and media.id == chase_video.id -%}{%- continue -%}{%- endif -%}
         {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
           <li
             id="Slide-{{ section.id }}-{{ media.id }}"

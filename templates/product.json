@@ -79,18 +79,6 @@
             "share_label": "Compartilhar"
           }
         },
-        "benefits": {
-          "type": "icon-with-text",
-          "settings": {
-            "layout": "horizontal",
-            "icon_1": "truck",
-            "heading_1": "<strong>Frete grátis</strong>acima de R$999",
-            "icon_2": "return",
-            "heading_2": "<strong>1ª troca grátis</strong>em até 30 dias",
-            "icon_3": "price_tag",
-            "heading_3": "<strong>6x sem juros</strong>no cartão"
-          }
-        },
         "complete_look": {
           "type": "chase_complete_look",
           "settings": {
@@ -105,7 +93,6 @@
         "variant_picker",
         "size_guide",
         "buy_buttons",
-        "benefits",
         "complete_look",
         "tab_description",
         "tab_care",
@@ -126,7 +113,8 @@
         "enable_video_looping": false,
         "padding_top": 0,
         "padding_bottom": 12,
-        "chase_autoplay_video": true
+        "chase_autoplay_video": true,
+        "chase_video_first": true
       }
     },
     "related-products": {

@@ -59,9 +59,34 @@
           class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}"
           style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
         >
+          {%- liquid
+            assign chase_card_video = null
+            assign chase_show_video = card_product.metafields.custom.mostrar_video.value | append: '' | downcase | strip
+            if chase_show_video == 'sim' or chase_show_video == 'true' or chase_show_video == 'yes' or chase_show_video == 's'
+              for chase_media in card_product.media
+                if chase_media.media_type == 'video'
+                  assign chase_card_video = chase_media
+                  break
+                endif
+              endfor
+            endif
+          -%}
           {%- if card_product.featured_media -%}
             <div class="card__media{% if image_shape and image_shape != 'default' %} shape--{{ image_shape }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
-              <div class="media media--transparent media--hover-effect">
+              <div class="media media--transparent media--hover-effect{% if chase_card_video %} chase-card-media--video{% endif %}">
+                {%- if chase_card_video -%}
+                  {{
+                    chase_card_video
+                    | video_tag:
+                      muted: true,
+                      loop: true,
+                      playsinline: true,
+                      controls: false,
+                      preload: 'none',
+                      image_size: '720x',
+                      class: 'chase-card-video'
+                  }}
+                {%- else -%}
                 {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
                 <img
                   srcset="
@@ -104,6 +129,7 @@
                     width="{{ card_product.media[1].width }}"
                     height="{{ card_product.media[1].height }}"
                   >
+                {%- endif -%}
                 {%- endif -%}
               </div>
             </div>
