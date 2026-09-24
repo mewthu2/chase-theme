@@ -45,19 +45,27 @@
             "show_gift_card_recipient": true
           }
         },
+        "complete_look": {
+          "type": "chase_complete_look",
+          "settings": {
+            "heading": "Complete o look",
+            "show_buy_all": true
+          }
+        },
         "tab_description": {
           "type": "collapsible_tab",
           "settings": {
+            "chase_show_description": true,
             "heading": "Descrição",
             "icon": "none",
             "content": "",
-            "page": "",
-            "chase_show_description": true
+            "page": ""
           }
         },
         "tab_care": {
           "type": "collapsible_tab",
           "settings": {
+            "chase_show_description": false,
             "heading": "Composição e cuidados",
             "icon": "none",
             "content": "<p>Consulte a etiqueta do produto. Lave à mão ou na máquina em ciclo delicado, com água fria. Não use alvejante nem secadora.</p>",
@@ -67,6 +75,7 @@
         "tab_returns": {
           "type": "collapsible_tab",
           "settings": {
+            "chase_show_description": false,
             "heading": "Trocas e devoluções",
             "icon": "none",
             "content": "<p>Primeira troca grátis em até 30 dias após o recebimento.</p>",
@@ -77,13 +86,6 @@
           "type": "share",
           "settings": {
             "share_label": "Compartilhar"
-          }
-        },
-        "complete_look": {
-          "type": "chase_complete_look",
-          "settings": {
-            "heading": "Complete o look",
-            "show_buy_all": true
           }
         }
       },
@@ -102,19 +104,30 @@
       "settings": {
         "enable_sticky_info": true,
         "color_scheme": "scheme-1",
-        "media_position": "left",
-        "gallery_layout": "columns",
         "media_size": "large",
         "constrain_to_viewport": true,
         "media_fit": "cover",
-        "image_zoom": "lightbox",
+        "gallery_layout": "columns",
         "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
         "hide_variants": true,
+        "chase_video_first": true,
+        "chase_autoplay_video": true,
         "enable_video_looping": false,
         "padding_top": 0,
-        "padding_bottom": 12,
-        "chase_autoplay_video": true,
-        "chase_video_first": true
+        "padding_bottom": 12
+      }
+    },
+    "disclosures": {
+      "type": "disclosures",
+      "settings": {
+        "heading": "Divulgações",
+        "heading_size": "h2",
+        "open_by_default": false,
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 0
       }
     },
     "related-products": {
@@ -124,22 +137,15 @@
         "heading_size": "h2",
         "products_to_show": 8,
         "columns_desktop": 4,
+        "columns_mobile": "2",
         "color_scheme": "scheme-1",
         "image_ratio": "portrait",
         "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
-        "columns_mobile": "2",
         "padding_top": 36,
         "padding_bottom": 28
-      }
-    },
-    "disclosures": {
-      "type": "disclosures",
-      "settings": {
-        "padding_top": 36,
-        "padding_bottom": 0
       }
     }
   },
