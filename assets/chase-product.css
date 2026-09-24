@@ -357,3 +357,14 @@
 .deferred-media.chase-autoplay:not([loaded]) .deferred-media__poster-button {
   opacity: 0;
 }
+
+@media screen and (max-width: 749px) {
+  .product__media-list .deferred-media.chase-autoplay {
+    display: block;
+    width: 100%;
+  }
+
+  .product__media-item:has(.deferred-media.chase-autoplay) .product__modal-opener {
+    display: none;
+  }
+}
