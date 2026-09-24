@@ -151,32 +151,6 @@
     },
     "content_for_index": [],
     "blocks": {
-      "18044534229175792068": {
-        "type": "shopify://apps/multi-location-stock-info/blocks/header_embed/7746d7fa-0a6b-4d82-aef7-c6caf8dc1f4b",
-        "disabled": true,
-        "settings": {
-          "target_element_id": "",
-          "target_position": "append",
-          "location_heading_header": "Select a location",
-          "icon_size": "medium",
-          "header_justify": "start",
-          "header_size": "medium",
-          "locationNamesDropDownText": "",
-          "header_background_color": "",
-          "popup_select_background_color": "",
-          "border_color": "",
-          "header_padding": 0,
-          "header_gap": 0,
-          "border_radius": 8,
-          "border_style": "none",
-          "popup_header_background_color": "",
-          "popup_header_text_color": "",
-          "locationCardDrawerView": "",
-          "popup_border_radius": 7.5,
-          "popup_border_style": "none",
-          "popup_border_color": ""
-        }
-      },
       "7669108132792546251": {
         "type": "shopify://apps/multi-location-stock-info/blocks/app_embed/7746d7fa-0a6b-4d82-aef7-c6caf8dc1f4b",
         "disabled": false,
@@ -257,6 +231,61 @@
         "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
         "disabled": false,
         "settings": {}
+      },
+      "15685250022964305326": {
+        "type": "shopify://apps/elevar-conversion-tracking/blocks/dataLayerEmbed/bc30ab68-b15c-4311-811f-8ef485877ad6",
+        "disabled": false,
+        "settings": {}
+      },
+      "12948015482042402483": {
+        "type": "shopify://apps/mercado-pago-antifraud-plus/blocks/embed-block/b19ea721-f94a-4308-bee5-0057c043bac5",
+        "disabled": true,
+        "settings": {}
+      },
+      "18044534229175792068": {
+        "type": "shopify://apps/multi-location-stock-info/blocks/header_embed/7746d7fa-0a6b-4d82-aef7-c6caf8dc1f4b",
+        "disabled": false,
+        "settings": {
+          "target_element_id": "",
+          "target_position": "append",
+          "location_heading_header": "Select a location",
+          "icon_size": "medium",
+          "header_justify": "start",
+          "header_size": "medium",
+          "locationNamesDropDownText": "",
+          "header_background_color": "",
+          "popup_select_background_color": "",
+          "border_color": "",
+          "header_padding": 0,
+          "header_gap": 0,
+          "border_radius": 8,
+          "border_style": "none",
+          "popup_header_background_color": "",
+          "popup_header_text_color": "",
+          "locationCardDrawerView": "",
+          "popup_border_radius": 7.5,
+          "popup_border_style": "none",
+          "popup_border_color": ""
+        }
+      },
+      "12120936241911852800": {
+        "type": "shopify://apps/judge-me-reviews/blocks/reviews_tab/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {
+          "position": "right"
+        }
+      },
+      "15181020662106344915": {
+        "type": "shopify://apps/judge-me-reviews/blocks/popup_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
+      },
+      "13047258039897440615": {
+        "type": "shopify://apps/judge-me-reviews/blocks/cart_drawer_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {
+          "widget_type": "review-widget"
+        }
       }
     },
     "color_schemes": {
