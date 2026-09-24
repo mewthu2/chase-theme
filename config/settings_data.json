@@ -131,6 +131,10 @@
     "chase_accent": "#D0021B",
     "chase_free_shipping_threshold": 999,
     "chase_new_tag": "novo",
+    "chase_phone": "(31) 98228-9239",
+    "chase_whatsapp": "5531982289239",
+    "chase_whatsapp_message": "Olá! Vim pelo site da CHASE.",
+    "chase_stores_url": "/pages/lojas",
     "sections": {
       "main-password-header": {
         "type": "main-password-header",
@@ -146,6 +150,95 @@
       }
     },
     "content_for_index": [],
+    "blocks": {
+      "18044534229175792068": {
+        "type": "shopify://apps/multi-location-stock-info/blocks/header_embed/7746d7fa-0a6b-4d82-aef7-c6caf8dc1f4b",
+        "disabled": true,
+        "settings": {
+          "target_element_id": "",
+          "target_position": "append",
+          "location_heading_header": "Select a location",
+          "icon_size": "medium",
+          "header_justify": "start",
+          "header_size": "medium",
+          "locationNamesDropDownText": "",
+          "header_background_color": "",
+          "popup_select_background_color": "",
+          "border_color": "",
+          "header_padding": 0,
+          "header_gap": 0,
+          "border_radius": 8,
+          "border_style": "none",
+          "popup_header_background_color": "",
+          "popup_header_text_color": "",
+          "locationCardDrawerView": "",
+          "popup_border_radius": 7.5,
+          "popup_border_style": "none",
+          "popup_border_color": ""
+        }
+      },
+      "7669108132792546251": {
+        "type": "shopify://apps/multi-location-stock-info/blocks/app_embed/7746d7fa-0a6b-4d82-aef7-c6caf8dc1f4b",
+        "disabled": false,
+        "settings": {}
+      },
+      "15912215999290715800": {
+        "type": "shopify://apps/orbe-geolocation/blocks/app-embed-modal/7cb09287-cd2b-4646-837c-f1f9b6ea703e",
+        "disabled": false,
+        "settings": {
+          "test_mode": false,
+          "modal_closeButton": false,
+          "option_flag_style": "none",
+          "option_currency_type": "none",
+          "option_language": true,
+          "option_search_country": false,
+          "title": "Are you in {country}?",
+          "text": "Please select your shipping country.",
+          "helper_text": "<p>Buy from the country of your choice. Remember that we can only ship your order to addresses located in the chosen country.</p>",
+          "cta_text": "Shop now",
+          "fallback_text": "We don’t ship to {country}",
+          "alignment_image": "right",
+          "style_corners": "square",
+          "style_dropdown": "outlined",
+          "modal_button_align": "right",
+          "title_font_size": 20,
+          "text_font_size": 14,
+          "show_blurred_background": false,
+          "style_colors_background": "#FFF",
+          "style_colors_closeButton": "#5C5F62",
+          "style_colors_cta_text": "#fff",
+          "style_colors_cta_button": "#000",
+          "style_colors_text": "#000"
+        }
+      },
+      "5858961087409699889": {
+        "type": "shopify://apps/orbe-geolocation/blocks/app-embed-footer-selector/7cb09287-cd2b-4646-837c-f1f9b6ea703e",
+        "disabled": false,
+        "settings": {
+          "footer_ui_type": "selector",
+          "block_position": "",
+          "option_language": true,
+          "style_corners": "square",
+          "style_dropdown": "outlined",
+          "option_classic_flag_style": "square",
+          "option_classic_currency_type": "none",
+          "open_direction": "upwards",
+          "search_country": true,
+          "option_modal_continent": false,
+          "option_flag_style": "square",
+          "option_currency_type": "iso",
+          "option_modal_language": true,
+          "title": "Select Your Region",
+          "language_title": "Preferred Language",
+          "helper_text": "Changing language will not affect your selected region",
+          "block_background": "#fff",
+          "style_colors_background": "#fff",
+          "style_colors_border": "#000",
+          "style_colors_text": "#000",
+          "block_alignement": "center"
+        }
+      }
+    },
     "color_schemes": {
       "scheme-1": {
         "settings": {
@@ -202,11 +295,7 @@
           "shadow": "#121212"
         }
       }
-    },
-    "chase_phone": "(31) 98228-9239",
-    "chase_whatsapp": "5531982289239",
-    "chase_whatsapp_message": "Olá! Vim pelo site da CHASE.",
-    "chase_stores_url": "/pages/lojas"
+    }
   },
   "presets": {
     "Dawn": {
