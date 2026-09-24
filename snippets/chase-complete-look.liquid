@@ -1,41 +1,101 @@
 {% doc %}
-  Renders the "Complete o look" product info block: a compact horizontal list of products from the
-  custom.complete_the_look metafield (product list). Renders nothing when the metafield is empty.
+  Renders the "Complete o look" product info block: products from the custom.complete_the_look
+  metafield (product list), each with a size picker and its own add button, plus a
+  "buy the complete look" button that adds the current product and every look item at once.
+  Renders nothing when the metafield is empty.
 
   @param {product} product - The current product
-  @param {object} block - The main-product block (settings: heading)
+  @param {object} block - The main-product block (settings: heading, show_buy_all)
+  @param {string} section_id - The main product section id
 
   @example
-  {% render 'chase-complete-look', product: product, block: block %}
+  {% render 'chase-complete-look', product: product, block: block, section_id: section.id %}
 {% enddoc %}
 {%- assign look_products = product.metafields.custom.complete_the_look.value -%}
 {%- if look_products != blank -%}
-  <div class="chase-look quick-add-hidden" {{ block.shopify_attributes }}>
+  <chase-look class="chase-look quick-add-hidden" data-section-id="{{ section_id }}" {{ block.shopify_attributes }}>
     {%- if block.settings.heading != blank -%}
       <h2 class="chase-look__heading">{{ block.settings.heading | escape }}</h2>
     {%- endif -%}
     <ul class="chase-look__list" role="list">
-      {%- for look_product in look_products limit: 8 -%}
-        <li class="chase-look__item">
-          <a href="{{ look_product.url }}" class="chase-look__link">
-            <div class="chase-look__media">
-              {%- if look_product.featured_media -%}
-                {{
-                  look_product.featured_media
-                  | image_url: width: 400
-                  | image_tag: loading: 'lazy', sizes: '160px', widths: '160, 240, 320, 400', alt: look_product.title
-                }}
-              {%- else -%}
-                {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
-              {%- endif -%}
-            </div>
-            <span class="chase-look__title">{{ look_product.title | escape }}</span>
+      {%- for look_product in look_products limit: 6 -%}
+        {%- liquid
+          assign size_option = null
+          for option in look_product.options_with_values
+            assign option_key = option.name | downcase | strip
+            if option_key == 'tamanho' or option_key == 'tamanhos' or option_key == 'size' or option_key == 'tam'
+              assign size_option = option
+              break
+            endif
+          endfor
+          assign select_id = 'ChaseLook-' | append: section_id | append: '-' | append: look_product.id
+        -%}
+        <li class="chase-look__item" data-look-item>
+          <a href="{{ look_product.url }}" class="chase-look__media" tabindex="-1" aria-hidden="true">
+            {%- if look_product.featured_media -%}
+              {{
+                look_product.featured_media
+                | image_url: width: 200
+                | image_tag: loading: 'lazy', sizes: '80px', widths: '100, 200', alt: ''
+              }}
+            {%- endif -%}
+          </a>
+          <div class="chase-look__info">
+            <a href="{{ look_product.url }}" class="chase-look__title">{{ look_product.title | escape }}</a>
             <span class="chase-look__price{% if look_product.compare_at_price > look_product.price %} chase-sale{% endif %}">
               {{- look_product.price | money -}}
             </span>
-          </a>
+            {%- if look_product.available -%}
+              <div class="chase-look__controls">
+                {%- if look_product.has_only_default_variant -%}
+                  <input type="hidden" data-look-variant value="{{ look_product.selected_or_first_available_variant.id }}">
+                {%- else -%}
+                  <label class="visually-hidden" for="{{ select_id }}">
+                    {%- if size_option -%}{{ size_option.name | escape }}{%- else -%}{{ 'chase.look.choose_option' | t }}{%- endif -%}
+                  </label>
+                  <select id="{{ select_id }}" class="chase-look__select" data-look-variant>
+                    <option value="" selected disabled>
+                      {%- if size_option -%}
+                        {{ 'chase.look.choose_size' | t }}
+                      {%- else -%}
+                        {{ 'chase.look.choose_option' | t }}
+                      {%- endif -%}
+                    </option>
+                    {%- if size_option -%}
+                      {%- for value in size_option.values -%}
+                        {%- if value.variant -%}
+                          <option value="{{ value.variant.id }}" {% unless value.variant.available %}disabled{% endunless %}>
+                            {{- value.name | escape -}}
+                            {%- unless value.variant.available %} — {{ 'chase.card.sold_out' | t }}{% endunless -%}
+                          </option>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    {%- else -%}
+                      {%- for variant in look_product.variants -%}
+                        <option value="{{ variant.id }}" {% unless variant.available %}disabled{% endunless %}>
+                          {{- variant.title | escape -}}
+                          {%- unless variant.available %} — {{ 'chase.card.sold_out' | t }}{% endunless -%}
+                        </option>
+                      {%- endfor -%}
+                    {%- endif -%}
+                  </select>
+                {%- endif -%}
+                <button type="button" class="chase-look__add" data-look-add>
+                  {{- 'chase.look.add' | t -}}
+                </button>
+              </div>
+            {%- else -%}
+              <span class="chase-look__soldout">{{ 'chase.card.sold_out' | t }}</span>
+            {%- endif -%}
+          </div>
         </li>
       {%- endfor -%}
     </ul>
-  </div>
+    {%- if block.settings.show_buy_all -%}
+      <button type="button" class="chase-btn chase-btn--dark chase-look__buy-all" data-look-buy-all>
+        {{- 'chase.look.buy_all' | t -}}
+      </button>
+    {%- endif -%}
+    <p class="chase-look__message" role="alert" hidden></p>
+  </chase-look>
 {%- endif -%}

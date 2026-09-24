@@ -553,7 +553,8 @@
     "header": {
       "wishlist": "Favoritos",
       "whatsapp": "WhatsApp",
-      "stores": "Ver lojas"
+      "stores": "Ver lojas",
+      "view_all": "Ver tudo"
     },
     "card": {
       "sold_out": "Esgotado",
@@ -585,7 +586,16 @@
       "free_shipping_remaining_html": "Faltam <strong>{{ amount }}</strong> para ganhar frete grátis",
       "free_shipping_label": "Progresso para frete grátis",
       "added": "Adicionado ao carrinho com sucesso",
-      "recommendations": "Combine com"
+      "recommendations": "Combine com",
+      "items_added": "{{ count }} peças"
+    },
+    "look": {
+      "choose_size": "Tamanho",
+      "choose_option": "Opção",
+      "add": "Adicionar",
+      "buy_all": "Comprar look completo",
+      "select_all": "Escolha o tamanho de todas as peças",
+      "added_all": "Look adicionado ao carrinho"
     }
   }
 }

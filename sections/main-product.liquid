@@ -11,6 +11,8 @@
 >
   {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
   {{ 'chase-product.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'chase-autoplay-video.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'chase-look.js' | asset_url }}" defer="defer"></script>
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
   {{ 'component-price.css' | asset_url | stylesheet_tag }}
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
@@ -698,7 +700,7 @@
                     {%- endif -%}
                   </product-recommendations>
                 {%- when 'chase_complete_look' -%}
-                  {%- render 'chase-complete-look', product: product, block: block -%}
+                  {%- render 'chase-complete-look', product: product, block: block, section_id: section.id -%}
                 {%- when 'icon-with-text' -%}
                   {% render 'icon-with-text', block: block %}
               {%- endcase -%}
@@ -1558,7 +1560,8 @@
           "type": "paragraph",
           "content": "Mostra os produtos do metafield custom.complete_the_look (lista de produtos). Se estiver vazio, o bloco não aparece."
         },
-        { "type": "text", "id": "heading", "label": "Título", "default": "Complete o look" }
+        { "type": "text", "id": "heading", "label": "Título", "default": "Complete o look" },
+        { "type": "checkbox", "id": "show_buy_all", "label": "Mostrar botão \"Comprar look completo\"", "default": true }
       ]
     },
     {
@@ -2329,6 +2332,13 @@
       "id": "hide_variants",
       "default": false,
       "label": "t:sections.main-product.settings.hide_variants.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "chase_autoplay_video",
+      "label": "Vídeos tocam sozinhos (mudos, em loop)",
+      "info": "Toca quando o vídeo aparece na tela e pausa quando sai",
+      "default": true
     },
     {
       "type": "checkbox",

@@ -37,50 +37,115 @@
 
 .chase-mega {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 4rem;
+  grid-template-columns: 22rem minmax(0, 1fr);
+  gap: 4.8rem;
+  align-items: start;
 }
 
-.chase-mega--has-promos {
-  grid-template-columns: minmax(0, 1fr) auto;
+.chase-mega--has-media {
+  grid-template-columns: 22rem minmax(0, 1fr) auto;
 }
 
-.chase-mega .mega-menu__list {
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
-  gap: 1.6rem 3.2rem;
-  padding: 0;
+.chase-mega__head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.2rem;
+  padding-right: 3.2rem;
+  border-right: 1px solid rgba(var(--color-foreground), 0.08);
+  min-height: 100%;
+}
+
+.chase-mega__title {
   margin: 0;
+  font-family: var(--font-heading-family);
+  font-size: 3.6rem;
+  font-weight: 800;
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.chase-mega__all {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(var(--color-foreground));
+  text-underline-offset: 0.4rem;
+}
+
+.chase-mega__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.chase-mega__links--flat {
+  columns: 3 16rem;
+  column-gap: 3.2rem;
+}
+
+.chase-mega__links--flat li {
+  break-inside: avoid;
+}
+
+.chase-mega__links--columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 2.4rem 3.2rem;
 }
 
 .chase-mega .mega-menu__link {
+  display: inline-block;
+  padding: 0.6rem 0;
   font-size: 1.4rem;
-  padding: 0.5rem 0;
-  color: rgba(var(--color-foreground), 0.7);
+  font-weight: 400;
+  color: rgba(var(--color-foreground), 0.75);
+  text-decoration: none;
+  transition: color 0.15s ease;
 }
 
-.chase-mega .mega-menu__link:hover {
+.chase-mega .mega-menu__link:hover,
+.chase-mega .mega-menu__link--active {
   color: rgb(var(--color-foreground));
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
 }
 
 .chase-mega .mega-menu__link--level-2 {
-  text-transform: uppercase;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 800;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: rgb(var(--color-foreground));
   margin-bottom: 0.4rem;
 }
 
-.chase-mega__promos {
+.chase-mega__media {
   display: flex;
-  gap: 1.6rem;
+  gap: 1.2rem;
 }
 
 .chase-mega-promo {
   display: block;
-  width: 26rem;
+  width: 20rem;
   color: rgb(var(--color-foreground));
   text-decoration: none;
+}
+
+@media screen and (max-width: 1199px) {
+  .chase-mega-promo {
+    width: 16rem;
+  }
+
+  .chase-mega__media .chase-mega-promo:nth-child(3) {
+    display: none;
+  }
+
+  .chase-mega__links--flat {
+    columns: 2 14rem;
+  }
 }
 
 .chase-mega-promo__media {
@@ -104,10 +169,15 @@
 .chase-mega-promo__heading {
   display: block;
   margin-top: 1rem;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.06em;
+}
+
+.mega-menu__content {
+  padding-top: 3.6rem;
+  padding-bottom: 4rem;
 }
 
 .mega-menu__content {

@@ -24,7 +24,7 @@
   <div class="page-width{% if section.settings.chase_show_contact %} chase-utility-grid{% endif %} utility-bar__grid{% if announcement_bar and language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--3-col{% elsif language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--2-col{% endif %}">
     {%- if section.settings.chase_show_contact -%}
       <div class="chase-utility chase-utility--left small-hide">
-        {%- render 'chase-contact-links', part: 'contact' -%}
+        {%- render 'chase-contact-links', part: 'phone' -%}
       </div>
     {%- endif -%}
     {%- if section.settings.show_social and social_icons -%}
@@ -143,7 +143,7 @@
     {%- endif -%}
     {%- if section.settings.chase_show_contact -%}
       <div class="chase-utility chase-utility--right small-hide">
-        {%- render 'chase-contact-links', part: 'stores' -%}
+        {%- render 'chase-contact-links', part: 'whatsapp,stores' -%}
       </div>
     {%- endif -%}
     <div class="localization-wrapper">

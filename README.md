@@ -46,7 +46,7 @@ Os arquivos do Dawn alterados são: `header.liquid`, `header-mega-menu.liquid`, 
 
 1. **Configurações do tema → Chase**: cor de destaque, valor para frete grátis (R$), tag que marca um produto como "NOVO" (padrão `novo`) e link da página de favoritos.
 2. **Mega-menu**: monte o menu principal em 3 níveis (item → coluna → links). Para colocar imagens: no editor, vá em Header → *Adicionar bloco* → **Imagem do mega-menu** e preencha "Item do menu" com o título exato do item (ex.: `Roupas`). São no máximo 2 imagens por item.
-3. **Complete o look**: é um bloco dentro das informações do produto (*Chase: Complete o look*). Em Configurações → Dados personalizados → Produtos, crie a definição `custom.complete_the_look` do tipo **Produto (lista)**. Depois escolha os produtos em cada produto.
+3. **Complete o look**: é um bloco dentro das informações do produto (*Chase: Complete o look*). Cada peça tem seletor de tamanho e botão "Adicionar", e o botão "Comprar look completo" adiciona o produto da página (no tamanho escolhido) junto com todas as peças. Em Configurações → Dados personalizados → Produtos, crie a definição `custom.complete_the_look` do tipo **Produto (lista)**. Depois escolha os produtos em cada produto.
 4. **Swatches de cor**: aparecem quando o produto tem uma opção chamada `Cor`/`Color`. Os swatches nativos do Shopify (cor ou imagem) são usados automaticamente. Sem eles, o tema tenta deduzir a cor pelo nome (preto, branco, vinho etc.) ou usa a imagem da variante.
 5. **Guia de tamanhos**: na página de produto, selecione a página no bloco "Guia de tamanhos".
 6. **Rodapé**: escolha os menus dos blocos Ajuda, Minha conta e Institucional.

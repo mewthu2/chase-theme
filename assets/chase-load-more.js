@@ -5,6 +5,19 @@ if (!customElements.get('chase-load-more')) {
       connectedCallback() {
         this.button = this.querySelector('.chase-load-more__button');
         this.button?.addEventListener('click', () => this.load());
+        if (this.button && 'IntersectionObserver' in window) {
+          this.observer = new IntersectionObserver(
+            (entries) => {
+              if (entries.some((entry) => entry.isIntersecting)) this.load();
+            },
+            { rootMargin: '0px 0px 800px 0px' }
+          );
+          this.observer.observe(this);
+        }
+      }
+
+      disconnectedCallback() {
+        this.observer?.disconnect();
       }
 
       async load() {
@@ -42,15 +55,22 @@ if (!customElements.get('chase-load-more')) {
             this.button.disabled = false;
           } else {
             delete this.dataset.nextUrl;
+            this.observer?.disconnect();
             this.button.remove();
           }
 
         } catch (error) {
           console.error(error);
-          window.location.href = nextUrl;
+          this.observer?.disconnect();
+          this.observer = null;
+          if (this.button) this.button.disabled = false;
         } finally {
           this.loading = false;
           this.button?.removeAttribute('aria-busy');
+          if (this.observer && this.dataset.nextUrl) {
+            this.observer.unobserve(this);
+            this.observer.observe(this);
+          }
         }
       }
     }

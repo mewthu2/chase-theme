@@ -1,5 +1,5 @@
 {% comment %}
-  Renders a megamenu for the header.
+  Renders a megamenu for the header (Chase layout: title + "ver tudo", link columns, images).
 
   Usage:
   {% render 'header-mega-menu' %}
@@ -10,6 +10,36 @@
     {%- for link in section.settings.menu.links -%}
       <li>
         {%- if link.links != blank -%}
+          {%- liquid
+            assign menu_key = link.title | downcase | strip
+            assign promo_count = 0
+            for block in section.blocks
+              if block.type == 'promo'
+                assign promo_key = block.settings.menu_item | downcase | strip
+                if promo_key == menu_key
+                  assign promo_count = promo_count | plus: 1
+                endif
+              endif
+            endfor
+
+            assign auto_tiles = 0
+            if promo_count == 0 and link.levels == 1
+              for childlink in link.links
+                if childlink.type == 'collection_link' and childlink.object.featured_image != blank
+                  assign auto_tiles = auto_tiles | plus: 1
+                endif
+              endfor
+            endif
+            assign auto_tiles = auto_tiles | at_most: 3
+
+            assign all_url = link.url
+            for childlink in link.links
+              assign child_key = childlink.title | downcase | strip
+              if child_key == 'all' or child_key == 'todos' or child_key == 'ver tudo' or child_key == 'tudo'
+                assign all_url = childlink.url
+              endif
+            endfor
+          -%}
           <header-menu>
             <details id="Details-HeaderMenu-{{ forloop.index }}" class="mega-menu">
               <summary
@@ -30,80 +60,109 @@
                 class="mega-menu__content color-{{ section.settings.menu_color_scheme }} gradient motion-reduce global-settings-popup"
                 tabindex="-1"
               >
-                {%- liquid
-                  assign menu_key = link.title | downcase | strip
-                  assign promo_count = 0
-                  for block in section.blocks
-                    if block.type == 'promo'
-                      assign promo_key = block.settings.menu_item | downcase | strip
-                      if promo_key == menu_key
-                        assign promo_count = promo_count | plus: 1
-                      endif
-                    endif
-                  endfor
-                -%}
-                <div class="chase-mega page-width{% if promo_count > 0 %} chase-mega--has-promos{% endif %}">
-                <ul
-                  class="mega-menu__list{% if link.levels == 1 %} mega-menu__list--condensed{% endif %}"
-                  role="list"
-                >
-                  {%- for childlink in link.links -%}
-                    <li>
-                      <a
-                        id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
-                        href="{{ childlink.url }}"
-                        class="mega-menu__link mega-menu__link--level-2 link{% if childlink.current %} mega-menu__link--active{% endif %}"
-                        {% if childlink.current %}
-                          aria-current="page"
-                        {% endif %}
-                      >
-                        {{ childlink.title | escape }}
-                      </a>
-                      {%- if childlink.links != blank -%}
-                        <ul class="list-unstyled" role="list">
-                          {%- for grandchildlink in childlink.links -%}
-                            <li>
-                              <a
-                                id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
-                                href="{{ grandchildlink.url }}"
-                                class="mega-menu__link link{% if grandchildlink.current %} mega-menu__link--active{% endif %}"
-                                {% if grandchildlink.current %}
-                                  aria-current="page"
-                                {% endif %}
-                              >
-                                {{ grandchildlink.title | escape }}
-                              </a>
-                            </li>
-                          {%- endfor -%}
-                        </ul>
-                      {%- endif -%}
-                    </li>
-                  {%- endfor -%}
-                </ul>
-                {%- if promo_count > 0 -%}
-                  <div class="chase-mega__promos">
-                    {%- assign shown = 0 -%}
-                    {%- for block in section.blocks -%}
-                      {%- if block.type != 'promo' or shown >= 2 -%}{%- continue -%}{%- endif -%}
-                      {%- assign promo_key = block.settings.menu_item | downcase | strip -%}
-                      {%- if promo_key == menu_key -%}
-                        {%- assign shown = shown | plus: 1 -%}
-                        <a href="{{ block.settings.link | default: link.url }}" class="chase-mega-promo" {{ block.shopify_attributes }}>
-                          <div class="chase-mega-promo__media">
-                            {%- if block.settings.image != blank -%}
-                              {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', sizes: '280px', widths: '300, 600', alt: block.settings.heading | escape }}
-                            {%- else -%}
-                              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                            {%- endif -%}
-                          </div>
-                          {%- if block.settings.heading != blank -%}
-                            <span class="chase-mega-promo__heading">{{ block.settings.heading | escape }}</span>
-                          {%- endif -%}
-                        </a>
-                      {%- endif -%}
-                    {%- endfor -%}
+                <div class="chase-mega page-width{% if promo_count > 0 or auto_tiles > 0 %} chase-mega--has-media{% endif %}">
+                  <div class="chase-mega__head">
+                    <p class="chase-mega__title">{{ link.title | escape }}</p>
+                    <a href="{{ all_url }}" class="chase-mega__all">{{ 'chase.header.view_all' | t }}</a>
                   </div>
-                {%- endif -%}
+
+                  {%- if link.levels == 1 -%}
+                    <ul class="chase-mega__links chase-mega__links--flat" role="list">
+                      {%- for childlink in link.links -%}
+                        {%- assign child_key = childlink.title | downcase | strip -%}
+                        {%- if child_key == 'all' or child_key == 'todos' or child_key == 'ver tudo' or child_key == 'tudo' -%}
+                          {%- continue -%}
+                        {%- endif -%}
+                        <li>
+                          <a
+                            id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                            href="{{ childlink.url }}"
+                            class="mega-menu__link link{% if childlink.current %} mega-menu__link--active{% endif %}"
+                            {% if childlink.current %}
+                              aria-current="page"
+                            {% endif %}
+                          >
+                            {{ childlink.title | escape }}
+                          </a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- else -%}
+                    <ul class="chase-mega__links chase-mega__links--columns" role="list">
+                      {%- for childlink in link.links -%}
+                        <li class="chase-mega__column">
+                          <a
+                            id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                            href="{{ childlink.url }}"
+                            class="mega-menu__link mega-menu__link--level-2 link{% if childlink.current %} mega-menu__link--active{% endif %}"
+                            {% if childlink.current %}
+                              aria-current="page"
+                            {% endif %}
+                          >
+                            {{ childlink.title | escape }}
+                          </a>
+                          {%- if childlink.links != blank -%}
+                            <ul class="list-unstyled" role="list">
+                              {%- for grandchildlink in childlink.links -%}
+                                <li>
+                                  <a
+                                    id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                    href="{{ grandchildlink.url }}"
+                                    class="mega-menu__link link{% if grandchildlink.current %} mega-menu__link--active{% endif %}"
+                                    {% if grandchildlink.current %}
+                                      aria-current="page"
+                                    {% endif %}
+                                  >
+                                    {{ grandchildlink.title | escape }}
+                                  </a>
+                                </li>
+                              {%- endfor -%}
+                            </ul>
+                          {%- endif -%}
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+
+                  {%- if promo_count > 0 -%}
+                    <div class="chase-mega__media">
+                      {%- assign shown = 0 -%}
+                      {%- for block in section.blocks -%}
+                        {%- if block.type != 'promo' or shown >= 3 -%}{%- continue -%}{%- endif -%}
+                        {%- assign promo_key = block.settings.menu_item | downcase | strip -%}
+                        {%- if promo_key == menu_key -%}
+                          {%- assign shown = shown | plus: 1 -%}
+                          <a href="{{ block.settings.link | default: link.url }}" class="chase-mega-promo" {{ block.shopify_attributes }}>
+                            <div class="chase-mega-promo__media">
+                              {%- if block.settings.image != blank -%}
+                                {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', sizes: '240px', widths: '300, 600', alt: block.settings.heading | escape }}
+                              {%- else -%}
+                                {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                              {%- endif -%}
+                            </div>
+                            {%- if block.settings.heading != blank -%}
+                              <span class="chase-mega-promo__heading">{{ block.settings.heading | escape }}</span>
+                            {%- endif -%}
+                          </a>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </div>
+                  {%- elsif auto_tiles > 0 -%}
+                    <div class="chase-mega__media">
+                      {%- assign shown = 0 -%}
+                      {%- for childlink in link.links -%}
+                        {%- if shown >= 3 -%}{%- break -%}{%- endif -%}
+                        {%- if childlink.type != 'collection_link' or childlink.object.featured_image == blank -%}{%- continue -%}{%- endif -%}
+                        {%- assign shown = shown | plus: 1 -%}
+                        <a href="{{ childlink.url }}" class="chase-mega-promo" tabindex="-1">
+                          <div class="chase-mega-promo__media">
+                            {{ childlink.object.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', sizes: '240px', widths: '300, 600', alt: childlink.title | escape }}
+                          </div>
+                          <span class="chase-mega-promo__heading">{{ childlink.title | escape }}</span>
+                        </a>
+                      {%- endfor -%}
+                    </div>
+                  {%- endif -%}
                 </div>
               </div>
             </details>

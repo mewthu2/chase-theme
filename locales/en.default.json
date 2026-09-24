@@ -541,7 +541,8 @@
     "header": {
       "wishlist": "Wishlist",
       "whatsapp": "WhatsApp",
-      "stores": "Find a store"
+      "stores": "Find a store",
+      "view_all": "View all"
     },
     "card": {
       "sold_out": "Sold out",
@@ -573,7 +574,16 @@
       "free_shipping_remaining_html": "You are <strong>{{ amount }}</strong> away from free shipping",
       "free_shipping_label": "Free shipping progress",
       "added": "Added to your bag",
-      "recommendations": "You may also like"
+      "recommendations": "You may also like",
+      "items_added": "{{ count }} items"
+    },
+    "look": {
+      "choose_size": "Size",
+      "choose_option": "Option",
+      "add": "Add",
+      "buy_all": "Buy the complete look",
+      "select_all": "Choose a size for every item",
+      "added_all": "Look added to your bag"
     }
   }
 }

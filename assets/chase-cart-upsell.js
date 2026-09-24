@@ -4,7 +4,10 @@
   let lastProductId = null;
 
   const getProductId = (state) => state?.product_id || state?.items?.[0]?.product_id || null;
-  const getTitle = (state) => state?.product_title || state?.items?.[0]?.product_title || '';
+  const getTitle = (state) => {
+    if (state?.items?.length > 1) return (strings.itemsAdded || '').replace('[count]', state.items.length);
+    return state?.product_title || state?.items?.[0]?.product_title || '';
+  };
 
   const insertUpsell = (drawer) => {
     if (!upsellHTML) return;

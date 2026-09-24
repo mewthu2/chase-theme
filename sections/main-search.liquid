@@ -13,6 +13,8 @@
 {%- endif -%}
 
 <script src="{{ 'main-search.js' | asset_url }}" defer="defer"></script>
+{{ 'chase-collection.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'chase-load-more.js' | asset_url }}" defer="defer"></script>
 
 <style>
   .template-search__header {
@@ -321,7 +323,7 @@
                 {%- endfor -%}
               </ul>
               {%- if paginate.pages > 1 -%}
-                {% render 'pagination', paginate: paginate %}
+                {% render 'chase-load-more', paginate: paginate, section_id: section.id %}
               {%- endif -%}
             </div>
           {%- endif -%}
