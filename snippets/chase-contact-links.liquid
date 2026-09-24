@@ -1,0 +1,57 @@
+{% doc %}
+  Renders the store contact links (phone, WhatsApp, stores) from the "Chase" theme settings.
+
+  @param {string} [part] - 'contact' (phone + WhatsApp), 'stores', or 'all' (default)
+  @param {string} [class_name] - Extra class for the list
+
+  @example
+  {% render 'chase-contact-links', part: 'contact' %}
+{% enddoc %}
+{%- liquid
+  assign part = part | default: 'all'
+  assign phone_digits = settings.chase_phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' | remove: '.'
+  assign whatsapp_digits = settings.chase_whatsapp | remove: ' ' | remove: '(' | remove: ')' | remove: '-' | remove: '+' | remove: '.'
+  assign show_contact = false
+  if part == 'contact' or part == 'all'
+    assign show_contact = true
+  endif
+  assign show_stores = false
+  if part == 'stores' or part == 'all'
+    if settings.chase_stores_url != blank
+      assign show_stores = true
+    endif
+  endif
+-%}
+{%- if show_contact and settings.chase_phone != blank or show_contact and whatsapp_digits != blank or show_stores -%}
+  <ul class="chase-contact {{ class_name }}" role="list">
+    {%- if show_contact and settings.chase_phone != blank -%}
+      <li>
+        <a href="tel:{{ phone_digits }}" class="chase-contact__link">
+          <span class="svg-wrapper">{{- 'chase-icon-phone.svg' | inline_asset_content -}}</span>
+          <span>{{ settings.chase_phone | escape }}</span>
+        </a>
+      </li>
+    {%- endif -%}
+    {%- if show_contact and whatsapp_digits != blank -%}
+      <li>
+        <a
+          href="https://wa.me/{{ whatsapp_digits }}{% if settings.chase_whatsapp_message != blank %}?text={{ settings.chase_whatsapp_message | url_encode }}{% endif %}"
+          class="chase-contact__link"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="svg-wrapper">{{- 'chase-icon-whatsapp.svg' | inline_asset_content -}}</span>
+          <span>{{ 'chase.header.whatsapp' | t }}</span>
+        </a>
+      </li>
+    {%- endif -%}
+    {%- if show_stores -%}
+      <li>
+        <a href="{{ settings.chase_stores_url }}" class="chase-contact__link">
+          <span class="svg-wrapper">{{- 'icon-map-pin.svg' | inline_asset_content -}}</span>
+          <span>{{ 'chase.header.stores' | t }}</span>
+        </a>
+      </li>
+    {%- endif -%}
+  </ul>
+{%- endif -%}

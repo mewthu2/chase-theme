@@ -140,6 +140,7 @@
             </ul>
           </nav>
           <div class="menu-drawer__utility-links">
+            {%- render 'chase-contact-links', part: 'all', class_name: 'chase-contact--drawer' -%}
             {%- if show_country_selector or show_language_selector -%}
               <div class="menu-drawer__localization header-localization">
                 {%- if show_country_selector -%}

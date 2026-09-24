@@ -1510,6 +1510,35 @@
         "id": "chase_wishlist_url",
         "label": "Link da página de favoritos",
         "info": "Deixe vazio para esconder o ícone"
+      },
+      {
+        "type": "header",
+        "content": "Contato no header"
+      },
+      {
+        "type": "text",
+        "id": "chase_phone",
+        "label": "Telefone",
+        "default": "(31) 98228-9239"
+      },
+      {
+        "type": "text",
+        "id": "chase_whatsapp",
+        "label": "WhatsApp (com DDI e DDD)",
+        "info": "Ex.: 5531982289239. Deixe vazio para esconder.",
+        "default": "5531982289239"
+      },
+      {
+        "type": "text",
+        "id": "chase_whatsapp_message",
+        "label": "Mensagem inicial do WhatsApp",
+        "default": "Olá! Vim pelo site da CHASE."
+      },
+      {
+        "type": "url",
+        "id": "chase_stores_url",
+        "label": "Link \"Ver lojas\"",
+        "default": "/pages/lojas"
       }
     ]
   }

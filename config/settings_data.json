@@ -121,8 +121,8 @@
     "predictive_search_enabled": true,
     "predictive_search_show_vendor": false,
     "predictive_search_show_price": false,
-    "currency_code_enabled": true,
-    "cart_type": "notification",
+    "currency_code_enabled": false,
+    "cart_type": "drawer",
     "show_vendor": false,
     "show_cart_note": false,
     "cart_drawer_collection": "",
@@ -202,7 +202,11 @@
           "shadow": "#121212"
         }
       }
-    }
+    },
+    "chase_phone": "(31) 98228-9239",
+    "chase_whatsapp": "5531982289239",
+    "chase_whatsapp_message": "Olá! Vim pelo site da CHASE.",
+    "chase_stores_url": "/pages/lojas"
   },
   "presets": {
     "Dawn": {
@@ -376,7 +380,7 @@
       "predictive_search_show_vendor": false,
       "predictive_search_show_price": false,
       "currency_code_enabled": false,
-      "cart_type": "notification",
+      "cart_type": "drawer",
       "show_vendor": false,
       "show_cart_note": false,
       "cart_drawer_collection": "",

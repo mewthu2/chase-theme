@@ -48,7 +48,8 @@
         "show_line_separator": false,
         "show_social": false,
         "enable_country_selector": false,
-        "enable_language_selector": false
+        "enable_language_selector": false,
+        "chase_show_contact": true
       }
     },
     "header": {
@@ -61,8 +62,6 @@
         "menu_type_desktop": "mega",
         "sticky_header_type": "on-scroll-up",
         "show_line_separator": true,
-        "color_scheme": "scheme-1",
-        "menu_color_scheme": "scheme-1",
         "enable_country_selector": false,
         "enable_language_selector": false,
         "margin_bottom": 0,

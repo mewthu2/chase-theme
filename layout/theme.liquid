@@ -53,6 +53,7 @@
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'chase-quick-sizes.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'chase-cart-upsell.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'cart-disclosure-modal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'cart-disclosure-tooltip.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
@@ -362,6 +363,11 @@
         cart_update_url: '{{ routes.cart_update_url }}',
         cart_url: '{{ routes.cart_url }}',
         predictive_search_url: '{{ routes.predictive_search_url }}',
+        product_recommendations_url: '{{ routes.product_recommendations_url }}',
+      };
+
+      window.chaseStrings = {
+        added: `{{ 'chase.cart.added' | t }}`,
       };
 
       window.cartStrings = {

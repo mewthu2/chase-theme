@@ -1,0 +1,33 @@
+{%- if recommendations.performed? and recommendations.products_count > 0 -%}
+  <div class="chase-upsell">
+    <h3 class="chase-upsell__heading">{{ 'chase.cart.recommendations' | t }}</h3>
+    <ul class="chase-upsell__list" role="list">
+      {%- for rec in recommendations.products limit: 6 -%}
+        <li class="chase-upsell__item">
+          <a href="{{ rec.url }}" class="chase-upsell__link">
+            <div class="chase-upsell__media">
+              {%- if rec.featured_media -%}
+                {{
+                  rec.featured_media
+                  | image_url: width: 360
+                  | image_tag: loading: 'lazy', sizes: '140px', widths: '140, 280, 360', alt: rec.title
+                }}
+              {%- endif -%}
+            </div>
+            <span class="chase-upsell__title">{{ rec.title | escape }}</span>
+            <span class="chase-upsell__price{% if rec.compare_at_price > rec.price %} chase-sale{% endif %}">
+              {{- rec.price | money -}}
+            </span>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Chase: recomendações",
+  "tag": "div"
+}
+{% endschema %}

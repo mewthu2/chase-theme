@@ -530,7 +530,9 @@
   },
   "chase": {
     "header": {
-      "wishlist": "Wishlist"
+      "wishlist": "Wishlist",
+      "whatsapp": "WhatsApp",
+      "stores": "Find a store"
     },
     "card": {
       "sold_out": "Sold out",
@@ -560,7 +562,9 @@
     "cart": {
       "free_shipping_done": "You have unlocked free shipping!",
       "free_shipping_remaining_html": "You are <strong>{{ amount }}</strong> away from free shipping",
-      "free_shipping_label": "Free shipping progress"
+      "free_shipping_label": "Free shipping progress",
+      "added": "Added to your bag",
+      "recommendations": "You may also like"
     }
   }
 }

@@ -542,7 +542,9 @@
   },
   "chase": {
     "header": {
-      "wishlist": "Favoritos"
+      "wishlist": "Favoritos",
+      "whatsapp": "WhatsApp",
+      "stores": "Ver lojas"
     },
     "card": {
       "sold_out": "Esgotado",
@@ -572,7 +574,9 @@
     "cart": {
       "free_shipping_done": "Você ganhou frete grátis!",
       "free_shipping_remaining_html": "Faltam <strong>{{ amount }}</strong> para ganhar frete grátis",
-      "free_shipping_label": "Progresso para frete grátis"
+      "free_shipping_label": "Progresso para frete grátis",
+      "added": "Adicionado ao carrinho com sucesso",
+      "recommendations": "Combine com"
     }
   }
 }

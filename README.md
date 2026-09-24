@@ -40,7 +40,9 @@ Os arquivos do Dawn alterados são: `header.liquid`, `header-mega-menu.liquid`, 
 
 - **Header**: o padrão agora é logo em cima e menu embaixo (Header → Posição do logo → "Superior centralizado"). Se quiser voltar ao menu com logo no meio da mesma linha, escolha "Centro, meio". O header fica **transparente no topo da home** quando a primeira seção é o *Chase: Hero* e ganha fundo branco ao rolar, passar o mouse ou abrir o menu. Isso se configura em Header → "Chase: header transparente".
 - **Compra rápida**: produtos com a opção `Tamanho`/`Size` mostram os tamanhos ao passar o mouse no card (desktop), e um clique já adiciona ao carrinho. No celular aparece um ícone de sacola que abre os tamanhos. Produtos sem opção de tamanho usam a compra rápida padrão do Dawn.
-- **Preço**: o código da moeda (BRL) está desligado em Configurações do tema → Formato de moeda.
+- **Preço**: o tema sempre usa o formato *sem* moeda (`money`). Se ainda aparecer "BRL", ajuste em Configurações da loja → Loja → Moeda → Formatar moeda → "HTML sem moeda" para `R$ {{amount_with_comma_separator}}`.
+- **Contato no header**: telefone, WhatsApp e link "Ver lojas" ficam em Configurações do tema → Chase. Aparecem na barra do topo (desktop) e no menu do celular.
+- **Carrinho**: ao adicionar um produto, o carrinho lateral mostra "Adicionado ao carrinho com sucesso" e a lista "Combine com", que usa as recomendações de produtos da Shopify (app Search & Discovery).
 
 1. **Configurações do tema → Chase**: cor de destaque, valor para frete grátis (R$), tag que marca um produto como "NOVO" (padrão `novo`) e link da página de favoritos.
 2. **Mega-menu**: monte o menu principal em 3 níveis (item → coluna → links). Para colocar imagens: no editor, vá em Header → *Adicionar bloco* → **Imagem do mega-menu** e preencha "Item do menu" com o título exato do item (ex.: `Roupas`). São no máximo 2 imagens por item.
