@@ -21,8 +21,8 @@
         "text": "",
         "button_label_1": "Comprar novidades",
         "button_link_1": "shopify://collections/novidades",
-        "button_label_2": "Leggings",
-        "button_link_2": "shopify://collections/leggings",
+        "button_label_2": "",
+        "button_link_2": "",
         "color_scheme": "scheme-3"
       }
     },
