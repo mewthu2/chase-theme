@@ -121,6 +121,7 @@
     },
     "disclosures": {
       "type": "disclosures",
+      "disabled": true,
       "settings": {
         "heading": "Divulgações",
         "heading_size": "h2",
